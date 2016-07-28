@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Build.VERSION;
 import android.view.View;
 
-import com.pigeonstudios.russianpigeon.androidimpl.Input.AccelerometerHandler;
 import com.pigeonstudios.russianpigeon.androidimpl.Input.Touch.MultiTouchHandler;
 import com.pigeonstudios.russianpigeon.androidimpl.Input.Touch.SingleTouchHandler;
 import com.pigeonstudios.russianpigeon.androidimpl.Input.Touch.TouchHandler;
