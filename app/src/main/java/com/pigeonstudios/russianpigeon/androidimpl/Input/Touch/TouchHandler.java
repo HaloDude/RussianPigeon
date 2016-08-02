@@ -1,6 +1,6 @@
 package com.pigeonstudios.russianpigeon.androidimpl.Input.Touch;
 
-import android.view.View;
+import android.view.View.OnTouchListener;
 
 import com.pigeonstudios.russianpigeon.framework.Input.TouchEvent;
 
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by DennisFedorchuk on 7/27/2016.
  */
-public interface TouchHandler extends View.OnTouchListener {
+public interface TouchHandler extends OnTouchListener {
     public boolean isTouchDown(int pointer);
 
     public int  getTouchX(int pointer);

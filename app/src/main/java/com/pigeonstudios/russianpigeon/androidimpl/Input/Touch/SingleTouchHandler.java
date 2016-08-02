@@ -15,10 +15,10 @@ import java.util.List;
  * Created by DennisFedorchuk on 7/27/2016.
  */
 public class SingleTouchHandler implements TouchHandler {
-    boolean isTouched;
+    private boolean isTouched;
     int touchX;
     int touchY;
-    Pool<TouchEvent> touchEventPool;
+    Pool <TouchEvent> touchEventPool;
     List <TouchEvent> touchEvents = new ArrayList<TouchEvent>();
     List <TouchEvent> touchEventsBuffer = new ArrayList <TouchEvent> ();
     float scaleX;
@@ -31,6 +31,7 @@ public class SingleTouchHandler implements TouchHandler {
                 return new TouchEvent();
             }
         };
+
         touchEventPool = new Pool <TouchEvent> (factory, 100);
         view.setOnTouchListener(this);
         this.scaleX = scaleX;
