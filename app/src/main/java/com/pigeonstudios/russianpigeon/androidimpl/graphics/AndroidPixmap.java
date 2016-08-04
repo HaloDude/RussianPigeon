@@ -18,6 +18,15 @@ public class AndroidPixmap implements Pixmap {
         this.format = format;
     }
 
+    public AndroidPixmap(Bitmap bitmap, PixmapFormat format, int width, int height){
+        this.bitmap = bitmap;
+        this.format = format;
+
+
+
+
+    }
+
     @Override
     public int getWidth() {
         return bitmap.getWidth();

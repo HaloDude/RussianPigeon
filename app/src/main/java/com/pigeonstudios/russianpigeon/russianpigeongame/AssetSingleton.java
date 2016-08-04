@@ -12,6 +12,7 @@ public class AssetSingleton {
 
     private Pixmap background;
     private Pixmap pigeon;
+    private Pixmap startButton;
 
     private AssetSingleton(){}
 
@@ -29,5 +30,13 @@ public class AssetSingleton {
 
     public void setPigeon(Pixmap pigeon) {
         this.pigeon = pigeon;
+    }
+
+    public Pixmap getStartButton() {
+        return startButton;
+    }
+
+    public void setStartButton(Pixmap startButton) {
+        this.startButton = startButton;
     }
 }

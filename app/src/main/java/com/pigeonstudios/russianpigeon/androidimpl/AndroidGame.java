@@ -19,6 +19,7 @@ import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.audio.Audio;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
+import com.pigeonstudios.russianpigeon.russianpigeongame.MenuScreen;
 
 /**
  * Created by DennisFedorchuk on 8/2/2016.
@@ -72,7 +73,7 @@ public class AndroidGame extends Activity implements Game {
     @Override
     public void onResume() {
         super.onResume();
-        wakeLock.acquire();
+        //\wakeLock.acquire();
         screen.resume();
         renderView.resume();
     }
@@ -80,7 +81,7 @@ public class AndroidGame extends Activity implements Game {
     @Override
     public void onPause() {
         super.onPause();
-        wakeLock.release();
+        //wakeLock.release();
         renderView.pause();
         screen.pause();
         if (isFinishing())
@@ -126,6 +127,6 @@ public class AndroidGame extends Activity implements Game {
 
     @Override
     public Screen getStartScreen() {
-        return null; //implements later
+        return new MenuScreen(this); //implements later
     }
 }
