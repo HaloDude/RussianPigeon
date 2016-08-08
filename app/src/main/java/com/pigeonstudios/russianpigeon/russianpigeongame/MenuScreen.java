@@ -1,21 +1,19 @@
 package com.pigeonstudios.russianpigeon.russianpigeongame;
 
-import com.pigeonstudios.russianpigeon.androidimpl.AndroidGame;
-import com.pigeonstudios.russianpigeon.androidimpl.graphics.AndroidGraphics;
-import com.pigeonstudios.russianpigeon.androidimpl.graphics.AndroidPixmap;
+import com.pigeonstudios.russianpigeon.androidimpl.Input.AndroidInput;
 import com.pigeonstudios.russianpigeon.framework.Game;
 import com.pigeonstudios.russianpigeon.framework.Input.TouchEvent;
 import com.pigeonstudios.russianpigeon.framework.Screen;
-import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics.PixmapFormat;
-import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by DennisFedorchuk on 8/3/2016.
  */
 public class MenuScreen extends Screen {
+    private Button startButton;
 
     public MenuScreen(Game game) {
         super(game);
@@ -25,7 +23,19 @@ public class MenuScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         AssetSingleton.instance.setBackground(game.getGraphics().newScaledPixmap("Background.jpg", PixmapFormat.RGB565, 720, 1280));
-        AssetSingleton.instance.setStartButton(game.getGraphics().newPixmap("Menu/StartButton.png", PixmapFormat.ARGB4444));
+        AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Menu/StartButton.png", PixmapFormat.ARGB4444, 300, 200));
+        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 0, 0);
+        //test for touch
+        List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
+        game.getInput().getKeyEvents(); // do this to clear the bufer. idk why
+        for(int i = 0; i < touchEvents.size(); i++){
+            if(touchEvents.get(i).type == TouchEvent.TOUCH_UP){
+                if(startButton.isTouched(touchEvents.get(i))){
+
+                }
+            }
+        }
+
     }
 
     private boolean inBounds(TouchEvent event, int x, int y, int width, int height) {
@@ -37,8 +47,10 @@ public class MenuScreen extends Screen {
 
     @Override
     public void draw(float deltaTime) {
+        int backgroundWidth = AssetSingleton.instance.getBackground().getWidth();
+        int backgroundHeight = AssetSingleton.instance.getBackground().getHeight();
         game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
-        game.getGraphics().drawPixmap(AssetSingleton.instance.getStartButton(), 300, 300);
+        startButton.draw(game.getGraphics());
     }
 
     @Override

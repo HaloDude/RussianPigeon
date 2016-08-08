@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -41,6 +42,10 @@ public class AndroidGame extends Activity implements Game {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
+
         //create a bitmap depending on the orientation
         boolean isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
@@ -65,15 +70,15 @@ public class AndroidGame extends Activity implements Game {
         setContentView(renderView); // set our render engine to the screen
 
         //do not dim screen
-        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "GLGame");
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GLGame");
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //\wakeLock.acquire();
+        wakeLock.acquire();
         screen.resume();
         renderView.resume();
     }
@@ -81,7 +86,7 @@ public class AndroidGame extends Activity implements Game {
     @Override
     public void onPause() {
         super.onPause();
-        //wakeLock.release();
+        wakeLock.release();
         renderView.pause();
         screen.pause();
         if (isFinishing())
