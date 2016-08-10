@@ -12,6 +12,8 @@ public interface Graphics {
 
     public Pixmap newScaledPixmap(String fileName, PixmapFormat format, int width, int height);
 
+    public Pixmap newCropedPixmap(String fileName, PixmapFormat format, int x, int y, int width, int height);
+
     public void clear(int color);
 
     public void drawPixel(int x, int y, int color);

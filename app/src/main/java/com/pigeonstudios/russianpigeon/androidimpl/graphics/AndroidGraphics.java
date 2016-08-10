@@ -122,6 +122,45 @@ public class AndroidGraphics implements Graphics {
         return new AndroidPixmap(resizedBitmap, format);
     }
 
+    public Pixmap newCropedPixmap(String fileName, PixmapFormat format, int x, int y, int width, int height){
+        Config config = null;
+        if (format == PixmapFormat.RGB565)
+            config = Config.RGB_565;
+        else if(format == PixmapFormat.ARGB4444)
+            config = Config.ARGB_4444;
+        else
+            config = Config.ARGB_8888;
+        Options options = new Options();
+        options.inPreferredConfig = config;
+
+        InputStream in = null;
+        Bitmap bitmap = null;
+        try {
+            in = assets.open(fileName);
+            bitmap = BitmapFactory.decodeStream(in);
+            if(bitmap == null)
+                throw new RuntimeException("Couldn't load bitmap from asset '" + fileName + "'");
+        } catch (IOException e) {
+            throw new RuntimeException("Couldn't load bitmap from asset '" + fileName + "'");
+        } finally {
+            if (in != null){
+                try{
+                    in.close();
+                } catch (IOException e){}
+            }
+        }
+        //crop
+        Bitmap cropedBitmap = Bitmap.createBitmap(bitmap, x, y, width, height);
+
+        if (bitmap.getConfig() == Config.RGB_565)
+            format = PixmapFormat.RGB565;
+        else if (bitmap.getConfig() == Config.ARGB_4444)
+            format = PixmapFormat.ARGB4444;
+        else
+            format = PixmapFormat.ARGB8888;
+
+        return new AndroidPixmap(cropedBitmap, format);
+    }
     @Override
     public void clear(int color) {
         canvas.drawRGB((color & 0xff0000) >> 16, (color & 0xff00) >> 8,
