@@ -18,7 +18,7 @@ public class GameWorld {
 
     public void update(){
         this.enemy.move();
-        if(seedSpeed%100 == 0){
+        if(seedSpeed%50 == 0){
             seeds.add(new Seed(AssetSingleton.instance.getSeed(), enemy.getX(), enemy.getY()));
             countSeeds++;
         }

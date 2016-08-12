@@ -20,6 +20,7 @@ import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.audio.Audio;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
+import com.pigeonstudios.russianpigeon.russianpigeongame.GameScreen;
 import com.pigeonstudios.russianpigeon.russianpigeongame.MenuScreen;
 
 /**
@@ -132,6 +133,6 @@ public class AndroidGame extends Activity implements Game {
 
     @Override
     public Screen getStartScreen() {
-        return new MenuScreen(this); //implements later
+        return new GameScreen(this); //implements later
     }
 }

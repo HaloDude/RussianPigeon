@@ -13,8 +13,26 @@ public class AssetSingleton {
     private Pixmap background;
     private Pixmap pigeon;
     private Pixmap startButton;
+    private Pixmap enemy;
+    private Pixmap seed;
+
+    public Pixmap getSeed() {
+        return seed;
+    }
+
+    public void setSeed(Pixmap seed) {
+        this.seed = seed;
+    }
 
     private AssetSingleton(){}
+
+    public Pixmap getEnemy() {
+        return enemy;
+    }
+
+    public void setEnemy(Pixmap enemy) {
+        this.enemy = enemy;
+    }
 
     public Pixmap getPigeon() {
         return pigeon;
