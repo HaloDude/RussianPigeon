@@ -40,6 +40,9 @@ public class MultiTouchHandler implements TouchHandler {
         };
         touchEventPool = new Pool<TouchEvent>(factory, 100);
         view.setOnTouchListener(this);
+
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
     }
 
     @Override
@@ -66,6 +69,11 @@ public class MultiTouchHandler implements TouchHandler {
                         touchEvent = touchEventPool.newObject();
                         touchEvent.type = TouchEvent.TOUCH_DOWN;
                         touchEvent.pointer = pointerId;
+
+                        //this does not work if the scale is 0. and it is for some reason.wtf?!
+                       // touchEvent.x = touchX[i] = (int) (event.getX(i) * scaleX);
+                       // touchEvent.y = touchY[i] = (int) (event.getY(i) * scaleY);
+
                         touchEvent.x = touchX[i] = (int) (event.getX(i) * scaleX);
                         touchEvent.y = touchY[i] = (int) (event.getY(i) * scaleY);
                         isTouched[i] = true;

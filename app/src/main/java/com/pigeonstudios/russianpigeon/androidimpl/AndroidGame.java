@@ -21,6 +21,7 @@ import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.audio.Audio;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.russianpigeongame.MenuScreen;
+import com.pigeonstudios.russianpigeon.russianpigeongame.PigeonGame;
 
 /**
  * Created by DennisFedorchuk on 8/2/2016.
@@ -53,6 +54,9 @@ public class AndroidGame extends Activity implements Game {
         int frameBufferHeight = isLandscape ? 1080 : 1920;*/
         int frameBufferWidth = 720;
         int frameBufferHeight = 1280;
+
+        //frameBufferWidth = 1080;
+        //frameBufferHeight = 1920;
         Bitmap frameBuffer = Bitmap.createBitmap(frameBufferWidth,
                 frameBufferHeight, Bitmap.Config.RGB_565);
         //find out the scaling factor if needed
@@ -60,6 +64,12 @@ public class AndroidGame extends Activity implements Game {
                 / getWindowManager().getDefaultDisplay().getWidth();
         float scaleY = (float) frameBufferHeight
                 / getWindowManager().getDefaultDisplay().getHeight();
+        //this is to fix the problem with touch whwn scale in 0
+        if(scaleX == 0)
+            scaleX = 1;
+        if(scaleY == 0)
+            scaleY = 1;
+
         //set up all the fields
         renderView = new AndroidFastRenderView(this, frameBuffer);
         graphics = new AndroidGraphics(getAssets(), frameBuffer);
@@ -131,7 +141,9 @@ public class AndroidGame extends Activity implements Game {
     }
 
     @Override
-    public Screen getStartScreen() {
-        return new MenuScreen(this); //implements later
+    public Screen getStartScreen() { return null;}
+
+    public AndroidFastRenderView getRenderView(){
+        return renderView;
     }
 }
