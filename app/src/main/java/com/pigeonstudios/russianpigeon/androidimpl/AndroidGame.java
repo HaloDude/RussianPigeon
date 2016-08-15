@@ -70,11 +70,6 @@ public class AndroidGame extends Activity implements Game {
                 / getWindowManager().getDefaultDisplay().getWidth();
         float scaleY = (float) frameBufferHeight
                 / getWindowManager().getDefaultDisplay().getHeight();
-        //this is to fix the problem with touch whwn scale in 0
-        if(scaleX == 0)
-            scaleX = 1;
-        if(scaleY == 0)
-            scaleY = 1;
 
         //save the screen props for the Drawable classes
         this.actualScreenWidth = getWindowManager().getDefaultDisplay().getWidth();
