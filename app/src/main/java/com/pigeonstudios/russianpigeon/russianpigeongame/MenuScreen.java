@@ -18,10 +18,10 @@ public class MenuScreen extends Screen {
     public MenuScreen(Game game) {
         super(game);
 
-        AssetSingleton.instance.setBackground(game.getGraphics().newScaledPixmap("Background.jpg", PixmapFormat.RGB565, 720, 1280));
+        AssetSingleton.instance.setBackground(game.getGraphics().newPixmap("Menu/Background.jpg", PixmapFormat.RGB565));
         AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Menu/StartButton.png", PixmapFormat.ARGB4444, 300, 200));
 
-        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 10, 10);
+        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 100, 100);
     }
 
     @Override
@@ -39,17 +39,8 @@ public class MenuScreen extends Screen {
 
     }
 
-    private boolean inBounds(TouchEvent event, int x, int y, int width, int height) {
-        if((event.x > x && event.x < x + width - 1) && (event.y > y && event.y < y + height - 1))
-            return true;
-        else
-            return false;
-    }
-
     @Override
     public void draw(float deltaTime) {
-        int backgroundWidth = AssetSingleton.instance.getBackground().getWidth();
-        int backgroundHeight = AssetSingleton.instance.getBackground().getHeight();
         game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
         startButton.draw(game.getGraphics());
     }

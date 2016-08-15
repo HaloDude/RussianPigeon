@@ -10,6 +10,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.pigeonstudios.russianpigeon.androidimpl.AndroidGame;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 
@@ -71,6 +72,10 @@ public class AndroidGraphics implements Graphics {
             format = PixmapFormat.ARGB4444;
         else
             format = PixmapFormat.ARGB8888;
+
+        //scale the pixmap to fit the size of the different screens
+        if(AndroidGame.getScaleX() != 1 || AndroidGame.getScaleY() != 1)
+            return newScaledPixmap(fileName, format,(int) (bitmap.getWidth() * AndroidGame.getScaleX()), (int)(bitmap.getHeight() * AndroidGame.getScaleY()));
 
         return new AndroidPixmap(bitmap, format);
     }
@@ -158,6 +163,10 @@ public class AndroidGraphics implements Graphics {
             format = PixmapFormat.ARGB4444;
         else
             format = PixmapFormat.ARGB8888;
+
+        //scale the pixmap to fit the size of the different screens
+        if(AndroidGame.getScaleX() != 1 || AndroidGame.getScaleY() != 1)
+            return newScaledPixmap(fileName, format,(int) (bitmap.getWidth() * AndroidGame.getScaleX()), (int)(bitmap.getHeight() * AndroidGame.getScaleY()));
 
         return new AndroidPixmap(cropedBitmap, format);
     }

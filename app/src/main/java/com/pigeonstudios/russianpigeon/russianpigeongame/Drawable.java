@@ -1,5 +1,6 @@
 package com.pigeonstudios.russianpigeon.russianpigeongame;
 
+import com.pigeonstudios.russianpigeon.androidimpl.AndroidGame;
 import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
@@ -14,13 +15,13 @@ public abstract class Drawable {
 
     public  Drawable(Pixmap pixmap, int x, int y){
         this.pixmap = pixmap;
-        this.x = x;
-        this.y = y;
+        this.x = (int)(x * AndroidGame.getScaleX());
+        this.y = (int)(y * AndroidGame.getScaleY());
     }
 
     public void setNewLocation(int x, int y){
-        this.x = x;
-        this.y = y;
+        this.x = (int)(x * AndroidGame.getScaleX());
+        this.y = (int)(y * AndroidGame.getScaleY());
     }
 
     public int getX(){

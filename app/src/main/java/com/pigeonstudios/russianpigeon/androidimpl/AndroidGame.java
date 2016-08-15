@@ -35,6 +35,12 @@ public class AndroidGame extends Activity implements Game {
     private Screen screen;
     private WakeLock wakeLock;
 
+    //screen properties
+    private static int actualScreenWidth;
+    private static int actualScreenHeight;
+    private static float scaleX;
+    private static float scaleY;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -52,8 +58,8 @@ public class AndroidGame extends Activity implements Game {
                 Configuration.ORIENTATION_LANDSCAPE;
         /*int frameBufferWidth = isLandscape ? 1920 : 1080;
         int frameBufferHeight = isLandscape ? 1080 : 1920;*/
-        int frameBufferWidth = 720;
-        int frameBufferHeight = 1280;
+        int frameBufferWidth = 1080;
+        int frameBufferHeight = 1920;
 
         //frameBufferWidth = 1080;
         //frameBufferHeight = 1920;
@@ -69,6 +75,12 @@ public class AndroidGame extends Activity implements Game {
             scaleX = 1;
         if(scaleY == 0)
             scaleY = 1;
+
+        //save the screen props for the Drawable classes
+        this.actualScreenWidth = getWindowManager().getDefaultDisplay().getWidth();
+        this.actualScreenHeight = getWindowManager().getDefaultDisplay().getHeight();
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
 
         //set up all the fields
         renderView = new AndroidFastRenderView(this, frameBuffer);
@@ -146,4 +158,22 @@ public class AndroidGame extends Activity implements Game {
     public AndroidFastRenderView getRenderView(){
         return renderView;
     }
+
+    public static float getScaleY() {
+        return scaleY;
+    }
+
+    public static float getScaleX() {
+        return scaleX;
+    }
+
+    public static int getActualScreenHeight() {
+        return actualScreenHeight;
+    }
+
+    public static int getActualScreenWidth() {
+        return actualScreenWidth;
+    }
+
+
 }
