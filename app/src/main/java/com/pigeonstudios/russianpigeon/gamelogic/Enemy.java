@@ -10,7 +10,6 @@ public class Enemy extends Drawable{
     public Enemy(Pixmap pixmap, int x, int y) {
         super(pixmap, x, y);
     }
-    //TODO we need 2 type of coordinate(x,y) one of them will be picture coord, and another one will be object coord
     private int x = 0;
     private int y = 0;
     private int speed = 4;

@@ -10,22 +10,25 @@ import java.util.Random;
 public class Seed extends Drawable {
     public Seed(Pixmap pixmap, int x, int y) {
         super(pixmap, x, y);
-        moveRight = random.nextBoolean();
-        moveLeft = !moveRight;
+        setSide();
+        setDirection();
+
     }
-    //TODO we need 2 type of coordinate(x,y) one of them will be picture coord, and another one will be object coord
+
     private int x = this.getX()+75;
     private int y = this.getY()+50;
-    private int xspeed = 12;
+    private int xspeed = 6;
     private int yspeed = 6;
     private boolean moveRight = false;
     private boolean moveLeft = false;
-    final Random random = new Random();
+    private int direction;
+    private Random random = new Random();
+    boolean kill;
 
     public void move(){
 
         if(moveRight){
-            x+=xspeed;
+            x+=xspeed*direction;
             y+=yspeed;
             if(x>=695){
                 moveRight = false;
@@ -34,7 +37,7 @@ public class Seed extends Drawable {
             }
             this.setNewLocation(x,y);
         }else if(moveLeft){
-            x-=xspeed;
+            x-=xspeed*direction;
             y+=yspeed;
             if(x<=0){
                 moveRight = true;
@@ -44,4 +47,23 @@ public class Seed extends Drawable {
             this.setNewLocation(x,y);
         }
     }
+
+    public void moveUp(){
+        y-=yspeed;
+
+        this.setNewLocation(x,y);
+    }
+
+    private void setDirection(){
+        direction = random.nextInt(3);
+        System.out.print(direction);
+
+    }
+
+    private void setSide(){
+        moveRight = random.nextBoolean();
+        moveLeft = !moveRight;
+    }
+
+
 }
