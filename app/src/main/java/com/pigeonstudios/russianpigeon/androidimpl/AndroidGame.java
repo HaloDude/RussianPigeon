@@ -133,6 +133,7 @@ public class AndroidGame extends Activity implements Game {
 
     @Override
     public Screen getStartScreen() {
-        return new GameScreen(this); //implements later
+        //return new GameScreen(this); //implements later
+        return null;
     }
 }
