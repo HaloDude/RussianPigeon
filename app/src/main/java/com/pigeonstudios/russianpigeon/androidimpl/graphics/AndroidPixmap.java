@@ -2,6 +2,7 @@ package com.pigeonstudios.russianpigeon.androidimpl.graphics;
 
 import android.graphics.Bitmap;
 
+import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics.PixmapFormat;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 
@@ -12,6 +13,8 @@ public class AndroidPixmap implements Pixmap {
 
     private Bitmap bitmap;
     private PixmapFormat format;
+    private int x;
+    private int y;
 
     public AndroidPixmap(Bitmap bitmap, PixmapFormat format){
         this.bitmap = bitmap;
@@ -38,7 +41,12 @@ public class AndroidPixmap implements Pixmap {
         bitmap.recycle();
     }
 
+
+
     public Bitmap getBitmap(){
         return bitmap;
     }
+
+
+
 }

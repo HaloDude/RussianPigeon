@@ -6,9 +6,11 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.pigeonstudios.russianpigeon.androidimpl.AndroidGame;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 
@@ -71,7 +73,115 @@ public class AndroidGraphics implements Graphics {
         else
             format = PixmapFormat.ARGB8888;
 
+        bitmap = autoScaleToScreen(bitmap);
+
         return new AndroidPixmap(bitmap, format);
+    }
+
+    public Pixmap newScaledPixmap(String fileName, PixmapFormat format, int width, int height){
+        Config config = null;
+        if (format == PixmapFormat.RGB565)
+            config = Config.RGB_565;
+        else if(format == PixmapFormat.ARGB4444)
+            config = Config.ARGB_4444;
+        else
+            config = Config.ARGB_8888;
+        Options options = new Options();
+        options.inPreferredConfig = config;
+
+        InputStream in = null;
+        Bitmap bitmap = null;
+        try {
+            in = assets.open(fileName);
+            bitmap = BitmapFactory.decodeStream(in);
+            if(bitmap == null)
+                throw new RuntimeException("Couldn't load bitmap from asset '" + fileName + "'");
+        } catch (IOException e) {
+            throw new RuntimeException("Couldn't load bitmap from asset '" + fileName + "'");
+        } finally {
+            if (in != null){
+                try{
+                    in.close();
+                } catch (IOException e){}
+            }
+        }
+        //resize
+        float scaleWidth = ((float) width / bitmap.getWidth());
+        float scaleHeight = ((float) height / bitmap.getHeight());
+        //Matrix for resize
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        //create a new bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false);
+
+        if (bitmap.getConfig() == Config.RGB_565)
+            format = PixmapFormat.RGB565;
+        else if (bitmap.getConfig() == Config.ARGB_4444)
+            format = PixmapFormat.ARGB4444;
+        else
+            format = PixmapFormat.ARGB8888;
+
+        resizedBitmap = autoScaleToScreen(resizedBitmap);
+
+        return new AndroidPixmap(resizedBitmap, format);
+    }
+
+    public Pixmap newCropedPixmap(String fileName, PixmapFormat format, int x, int y, int width, int height){
+        Config config = null;
+        if (format == PixmapFormat.RGB565)
+            config = Config.RGB_565;
+        else if(format == PixmapFormat.ARGB4444)
+            config = Config.ARGB_4444;
+        else
+            config = Config.ARGB_8888;
+        Options options = new Options();
+        options.inPreferredConfig = config;
+
+        InputStream in = null;
+        Bitmap bitmap = null;
+        try {
+            in = assets.open(fileName);
+            bitmap = BitmapFactory.decodeStream(in);
+            if(bitmap == null)
+                throw new RuntimeException("Couldn't load bitmap from asset '" + fileName + "'");
+        } catch (IOException e) {
+            throw new RuntimeException("Couldn't load bitmap from asset '" + fileName + "'");
+        } finally {
+            if (in != null){
+                try{
+                    in.close();
+                } catch (IOException e){}
+            }
+        }
+        //crop
+        Bitmap cropedBitmap = Bitmap.createBitmap(bitmap, x, y, width, height);
+
+        if (bitmap.getConfig() == Config.RGB_565)
+            format = PixmapFormat.RGB565;
+        else if (bitmap.getConfig() == Config.ARGB_4444)
+            format = PixmapFormat.ARGB4444;
+        else
+            format = PixmapFormat.ARGB8888;
+
+        cropedBitmap = autoScaleToScreen(cropedBitmap);
+
+        return new AndroidPixmap(cropedBitmap, format);
+    }
+
+    public Bitmap autoScaleToScreen(Bitmap bitmap){
+        //scale the pixmap to fit the size of the different screens
+
+        //resize
+        float scaleWidth = (((float) bitmap.getWidth() * AndroidGame.getScaleX()) / bitmap.getWidth());
+        float scaleHeight = (((float) bitmap.getHeight() * AndroidGame.getScaleY()) / bitmap.getHeight());
+        //Matrix for resize
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        //create a new bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false);
+        return resizedBitmap;
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -19,6 +20,8 @@ import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.audio.Audio;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
+import com.pigeonstudios.russianpigeon.russianpigeongame.MenuScreen;
+import com.pigeonstudios.russianpigeon.russianpigeongame.PigeonGame;
 
 /**
  * Created by DennisFedorchuk on 8/2/2016.
@@ -32,6 +35,12 @@ public class AndroidGame extends Activity implements Game {
     private Screen screen;
     private WakeLock wakeLock;
 
+    //screen properties
+    private static int actualScreenWidth;
+    private static int actualScreenHeight;
+    private static float scaleX;
+    private static float scaleY;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -40,13 +49,20 @@ public class AndroidGame extends Activity implements Game {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
+
         //create a bitmap depending on the orientation
         boolean isLandscape = getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE;
         /*int frameBufferWidth = isLandscape ? 1920 : 1080;
         int frameBufferHeight = isLandscape ? 1080 : 1920;*/
-        int frameBufferWidth = 720;
-        int frameBufferHeight = 1280;
+        int frameBufferWidth = 1080;
+        int frameBufferHeight = 1920;
+
+        //frameBufferWidth = 1080;
+        //frameBufferHeight = 1920;
         Bitmap frameBuffer = Bitmap.createBitmap(frameBufferWidth,
                 frameBufferHeight, Bitmap.Config.RGB_565);
         //find out the scaling factor if needed
@@ -54,6 +70,13 @@ public class AndroidGame extends Activity implements Game {
                 / getWindowManager().getDefaultDisplay().getWidth();
         float scaleY = (float) frameBufferHeight
                 / getWindowManager().getDefaultDisplay().getHeight();
+
+        //save the screen props for the Drawable classes
+        this.actualScreenWidth = getWindowManager().getDefaultDisplay().getWidth();
+        this.actualScreenHeight = getWindowManager().getDefaultDisplay().getHeight();
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+
         //set up all the fields
         renderView = new AndroidFastRenderView(this, frameBuffer);
         graphics = new AndroidGraphics(getAssets(), frameBuffer);
@@ -64,8 +87,8 @@ public class AndroidGame extends Activity implements Game {
         setContentView(renderView); // set our render engine to the screen
 
         //do not dim screen
-        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "GLGame");
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GLGame");
 
     }
 
@@ -125,7 +148,27 @@ public class AndroidGame extends Activity implements Game {
     }
 
     @Override
-    public Screen getStartScreen() {
-        return null; //implements later
+    public Screen getStartScreen() { return null;}
+
+    public AndroidFastRenderView getRenderView(){
+        return renderView;
     }
+
+    public static float getScaleY() {
+        return scaleY;
+    }
+
+    public static float getScaleX() {
+        return scaleX;
+    }
+
+    public static int getActualScreenHeight() {
+        return actualScreenHeight;
+    }
+
+    public static int getActualScreenWidth() {
+        return actualScreenWidth;
+    }
+
+
 }
