@@ -20,8 +20,7 @@ import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.audio.Audio;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
-import com.pigeonstudios.russianpigeon.russianpigeongame.MenuScreen;
-import com.pigeonstudios.russianpigeon.russianpigeongame.PigeonGame;
+import com.pigeonstudios.russianpigeon.russianpigeongame.GameScreen;
 
 /**
  * Created by DennisFedorchuk on 8/2/2016.
@@ -148,7 +147,7 @@ public class AndroidGame extends Activity implements Game {
     }
 
     @Override
-    public Screen getStartScreen() { return null;}
+    public Screen getStartScreen(){return new GameScreen(this);}
 
     public AndroidFastRenderView getRenderView(){
         return renderView;
