@@ -46,11 +46,12 @@ public class Seed extends Drawable {
             }
             this.setNewLocation(x,y);
         }
+
     }
 
+    //just for testing
     public void moveUp(){
         y-=yspeed;
-
         this.setNewLocation(x,y);
     }
 

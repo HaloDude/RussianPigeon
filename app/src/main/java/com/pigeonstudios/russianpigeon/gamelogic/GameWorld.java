@@ -8,32 +8,18 @@ import java.util.LinkedList;
  * Created by tosch on 10.08.2016.
  */
 public class GameWorld {
-    //TODO need better algoritm to generate seeds and remove it after fall
     public Enemy enemy;
-    public int countSeeds=0;
+    public Pigeon pigeon;
+    public int countSeeds = 0;
     public int seedPeriod = 0;
     public LinkedList<Seed> seeds = new LinkedList<Seed>();
 
     public void update(){
+        this.pigeon.move();
         this.enemy.move();
-        if(seedPeriod%50 == 0){
-            seeds.add(new Seed(AssetSingleton.instance.getSeed(), enemy.getX(), enemy.getY()));
-            countSeeds++;
-        }
-        seedPeriod++;
+        generateSeeds(0);
+        isCatched();
 
-        //testing code
-        for(Seed s : seeds){
-            if(s.getY()>1200) {
-                s.kill = true;
-            }
-            if(!s.kill){
-                s.move();
-            }else{
-                s.moveUp();
-            }
-        }
-        //=====================
     }
 
     public void checkSeed(){
@@ -44,7 +30,28 @@ public class GameWorld {
         }
     }
 
+    public void generateSeeds(double time){
+        //TODO need to check delta time and generate seeds
+        if(seedPeriod%50 == 0){
+            seeds.add(new Seed(AssetSingleton.instance.getSeed(), enemy.getX(), enemy.getY()));
+            countSeeds++;
+        }
+        seedPeriod++;
+    }
+
     public void isCatched(){
         //TODO need to check if seed was catched by pigeon
+        //testing code
+        for(Seed s : seeds){
+            if(s.getY()>1800) {
+                s.kill = true;
+            }
+            if(!s.kill){
+                s.move();
+            }else{
+                s.moveUp();
+            }
+        }
+        //=====================
     }
 }
