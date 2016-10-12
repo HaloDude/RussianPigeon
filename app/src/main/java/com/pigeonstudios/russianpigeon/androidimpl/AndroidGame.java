@@ -1,13 +1,11 @@
 package com.pigeonstudios.russianpigeon.androidimpl;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 

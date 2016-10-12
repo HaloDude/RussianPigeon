@@ -15,6 +15,7 @@ public class AssetSingleton {
     private Pixmap startButton;
     private Pixmap enemy;
     private Pixmap seed;
+    private Pixmap controlBall;
 
     public Pixmap getSeed() {
         return seed;
@@ -56,5 +57,13 @@ public class AssetSingleton {
 
     public void setStartButton(Pixmap startButton) {
         this.startButton = startButton;
+    }
+
+    public Pixmap getControlBall() {
+        return controlBall;
+    }
+
+    public void setControlBall(Pixmap controlBall) {
+        this.controlBall = controlBall;
     }
 }

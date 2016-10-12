@@ -18,7 +18,7 @@ public class MenuScreen extends Screen {
     public MenuScreen(Game game) {
         super(game);
 
-        AssetSingleton.instance.setBackground(game.getGraphics().newPixmap("Menu/Background.jpg", PixmapFormat.RGB565));
+        //AssetSingleton.instance.setBackground(game.getGraphics().newPixmap("Menu/Background.jpg", PixmapFormat.RGB565));
         AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Menu/StartButton.png", PixmapFormat.ARGB4444, 300, 200));
 
         this.startButton = new Button(AssetSingleton.instance.getStartButton(), 100, 100);
@@ -28,12 +28,12 @@ public class MenuScreen extends Screen {
     public void update(float deltaTime) {
         //test for touch
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
-        game.getInput().getKeyEvents(); // do this to clear the bufer. idk why
+        game.getInput().getKeyEvents(); // do this to clear the buffer. idk why
         for(int i = 0; i < touchEvents.size(); i++) {
             if (touchEvents.get(i).type == TouchEvent.TOUCH_UP) {
                 if (startButton.isTouched(touchEvents.get(i))) {
                     startButton.setNewLocation(startButton.getX() + 50, 1200);
-                }
+            }
             }
         }
 

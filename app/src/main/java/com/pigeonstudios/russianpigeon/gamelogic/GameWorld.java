@@ -14,7 +14,11 @@ public class GameWorld {
     public int seedPeriod = 0;
     public LinkedList<Seed> seeds = new LinkedList<Seed>();
 
-    public void update(){
+    public GameWorld(){
+    }
+
+
+    public void update(float deltaTime){
         this.pigeon.move();
         this.enemy.move();
         generateSeeds(0);
