@@ -1,5 +1,6 @@
 package com.pigeonstudios.russianpigeon.gamelogic;
 
+import com.pigeonstudios.russianpigeon.androidimpl.AndroidGame;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 import com.pigeonstudios.russianpigeon.russianpigeongame.Drawable;
 
@@ -19,7 +20,7 @@ public class Enemy extends Drawable{
     public void move(){
         if(moveRight){
             x+=speed;
-            if(x>=420){
+            if(x >= (1080-450)){
                 moveRight = false;
                 moveLeft = true;
                 return;
