@@ -15,8 +15,8 @@ public class Seed extends Drawable {
 
     }
 
-    private int x = this.getX()+75;
-    private int y = this.getY()+50;
+    private int x = this.getX();
+    private int y = this.getY();
     private int xspeed = 6;
     private int yspeed = 6;
     private boolean moveRight = false;

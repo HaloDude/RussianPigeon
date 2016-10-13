@@ -20,8 +20,8 @@ public abstract class Drawable {
     }
 
     public void setNewLocation(int x, int y){
-        this.x = (int)(x * AndroidGame.getScaleX());
-        this.y = (int)(y * AndroidGame.getScaleY());
+        this.x = (int)(x);
+        this.y = (int)(y);
     }
 
     public int getX(){

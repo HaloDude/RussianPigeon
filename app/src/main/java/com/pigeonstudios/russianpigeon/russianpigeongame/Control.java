@@ -17,8 +17,10 @@ public class Control {
     private Graphics g;
 
     public Control(int screenWidth, int screenHeight, Graphics g){
-        this.x = screenWidth/2;
-        this.y = screenHeight - AssetSingleton.instance.getControlBall().getHeight();
+        this.g = g;
+        AssetSingleton.instance.setControlBall(g.newScaledPixmap("Control/controlBall.png", Graphics.PixmapFormat.RGB565, 100, 100));
+        this.x = 300;
+        this.y = 1100;
         this.controlBall = new ControlBall(AssetSingleton.instance.getControlBall(), x, y);
     }
 
@@ -27,6 +29,8 @@ public class Control {
             if (controlBall.isTouched(touchEvents.get(i))) {
                 if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_DRAGGED) {
                     this.x = touchEvents.get(i).x;
+                    controlBall.setNewLocation(x,y);
+                    return;
                 }
             }
 
