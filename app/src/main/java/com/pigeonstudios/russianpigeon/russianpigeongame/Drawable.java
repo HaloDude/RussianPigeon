@@ -32,6 +32,10 @@ public abstract class Drawable {
         return y;
     }
 
+    public Pixmap getPixmap(){
+        return pixmap;
+    }
+
     public boolean isTouched(Input.TouchEvent event) {
         if ((event.x > x && event.x < x + pixmap.getWidth() - 1)) {
             if ((event.y > y && event.y < y + pixmap.getHeight() - 1))

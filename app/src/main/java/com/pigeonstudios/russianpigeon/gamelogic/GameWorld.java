@@ -1,8 +1,13 @@
 package com.pigeonstudios.russianpigeon.gamelogic;
 
 
+import android.graphics.Rect;
+
 import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
+import com.pigeonstudios.russianpigeon.russianpigeongame.Drawable;
+
 import java.util.LinkedList;
+
 
 /**
  * Created by tosch on 10.08.2016.
@@ -24,7 +29,7 @@ public class GameWorld {
 
         generateSeeds(deltaTime);
         moveSeeds();
-        //isCatched();
+        isCatched();
 
     }
 
@@ -49,8 +54,8 @@ public class GameWorld {
         //testing code
 
         for (Seed s : seeds) {
-            if ((Math.abs(s.getX() - pigeon.getX()) <= (35 + 300) / 2f) && (Math.abs(s.getY() - pigeon.getY()) <= (70 + 300) / 2f)) {
-                s.setNewLocation(0,0);
+            if(getRect(pigeon).contains(getRect(s))){
+                s.setNewLocation(3000,3000);
             }
             /*
             if(s.getY()>1800) {
@@ -65,4 +70,11 @@ public class GameWorld {
             //=====================
         }
     }
+
+    public Rect getRect(Drawable d){
+        Rect r = new Rect(d.getX(),d.getY(),d.getX()+d.getPixmap().getWidth(),d.getY()+d.getPixmap().getHeight());
+        return r;
+    }
+
+
 }
