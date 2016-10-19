@@ -19,6 +19,7 @@ import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.audio.Audio;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.russianpigeongame.GameScreen;
+import com.pigeonstudios.russianpigeon.russianpigeongame.LoadingScreen;
 
 /**
  * Created by DennisFedorchuk on 8/2/2016.
@@ -145,7 +146,7 @@ public class AndroidGame extends Activity implements Game {
     }
 
     @Override
-    public Screen getStartScreen(){return new GameScreen(this);}
+    public Screen getStartScreen(){return new LoadingScreen(this);}
 
     public AndroidFastRenderView getRenderView(){
         return renderView;

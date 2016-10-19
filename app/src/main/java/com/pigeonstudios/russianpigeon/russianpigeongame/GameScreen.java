@@ -17,10 +17,6 @@ public class GameScreen extends Screen {
 
     public GameScreen(Game game) {
         super(game);
-        AssetSingleton.instance.setEnemy(game.getGraphics().newScaledPixmap("Sprites/2040120.png", Graphics.PixmapFormat.RGB565, 300, 300));
-        AssetSingleton.instance.setSeed(game.getGraphics().newScaledPixmap("Sprites/seed.png", Graphics.PixmapFormat.RGB565, 35, 70));
-        AssetSingleton.instance.setBackground(game.getGraphics().newPixmap("Sprites/bg1.jpg", Graphics.PixmapFormat.RGB565));
-        AssetSingleton.instance.setPigeon(game.getGraphics().newScaledPixmap("Sprites/1.jpg", Graphics.PixmapFormat.RGB565, 200, 200));
         gw.enemy = new Enemy(AssetSingleton.instance.getEnemy(), 0, 0);
         gw.pigeon = new Pigeon(AssetSingleton.instance.getPigeon(), 300, 1000);
     }
