@@ -26,6 +26,7 @@ public class GameScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         gw.update(deltaTime);
+
         c.update(game.getInput().getTouchEvents());
     }
 
@@ -38,6 +39,7 @@ public class GameScreen extends Screen {
         for(int i = 0; i < gw.countSeeds; i++){
             gw.seeds.get(i).draw(game.getGraphics());
         }
+        game.getGraphics().drawText(String.valueOf(gw.FPS),0,100,Color.BLUE);
     }
 
     @Override
