@@ -40,9 +40,7 @@ public class Animation {
         }
     }
 
-    public Pixmap nextAnimation(){
-        return null;
-    }
+    public Pixmap nextAnimation(){return null;}
 
     public Pixmap prevAnimation(){
         return null;

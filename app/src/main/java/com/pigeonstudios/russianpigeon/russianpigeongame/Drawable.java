@@ -9,7 +9,7 @@ import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
  * Created by DennisFedorchuk on 8/7/2016.
  */
 public abstract class Drawable {
-    private Pixmap pixmap;
+    protected Pixmap pixmap;
     private int x;
     private int y;
 

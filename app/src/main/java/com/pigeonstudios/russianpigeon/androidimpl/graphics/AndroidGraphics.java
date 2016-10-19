@@ -6,6 +6,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -194,6 +195,12 @@ public class AndroidGraphics implements Graphics {
     public void drawPixel(int x, int y, int color) {
         paint.setColor(color);
         canvas.drawPoint(x, y, paint);
+    }
+
+    public void drawText(String text, int x, int y, int color){
+        paint.setColor(color);
+        paint.setTextSize(50);
+        canvas.drawText(text, x, y, paint);
     }
 
     @Override

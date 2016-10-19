@@ -1,5 +1,7 @@
 package com.pigeonstudios.russianpigeon.russianpigeongame;
 
+import android.graphics.Color;
+
 import com.pigeonstudios.russianpigeon.framework.Game;
 import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;

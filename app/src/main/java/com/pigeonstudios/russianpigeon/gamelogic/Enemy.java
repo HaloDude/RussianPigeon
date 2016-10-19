@@ -17,6 +17,10 @@ public class Enemy extends Drawable{
     private boolean moveRight = true;
     private boolean moveLeft = false;
 
+    public void update(){
+        move();
+    }
+
     public void move(){
         if(moveRight){
             x+=speed;
