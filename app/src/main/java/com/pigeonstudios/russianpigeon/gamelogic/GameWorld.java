@@ -50,11 +50,10 @@ public class GameWorld {
     }
 
     public void isCatched() {
-        //TODO need to check if seed was catched by pigeon
         //testing code
 
         for (Seed s : seeds) {
-            if(getRect(pigeon).contains(getRect(s))){
+            if(getRect(pigeon).intersect(getRect(s))){
                 s.setNewLocation(3000,3000);
             }
             /*
