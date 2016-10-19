@@ -19,7 +19,6 @@ public class GameWorld {
     public LinkedList<Seed> seeds = new LinkedList<Seed>();
     static private float time = 0;
     static private int updateCount = 0;
-    public int FPS = 0;
 
     public GameWorld() {
 
@@ -38,11 +37,10 @@ public class GameWorld {
 
     public void generateSeeds(float deltaTime) {
         time += deltaTime;
-        if (time >= 1) {
+        if (time >= 0.5) {
             seeds.add(new Seed(AssetSingleton.instance.getSeed(), enemy.getX(), enemy.getY() + 75));
             countSeeds++;
 
-            FPS = updateCount;
             updateCount = 0;
             time = 0;
         }

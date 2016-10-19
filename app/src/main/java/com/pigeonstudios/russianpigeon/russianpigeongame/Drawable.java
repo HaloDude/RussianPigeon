@@ -15,8 +15,8 @@ public abstract class Drawable {
 
     public  Drawable(Pixmap pixmap, int x, int y){
         this.pixmap = pixmap;
-        this.x = (int)(x * AndroidGame.getScaleX());
-        this.y = (int)(y * AndroidGame.getScaleY());
+        this.x = (int)(x);
+        this.y = (int)(y);
     }
 
     public void setNewLocation(int x, int y){

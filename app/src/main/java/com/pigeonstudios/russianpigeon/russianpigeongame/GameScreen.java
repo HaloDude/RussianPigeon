@@ -14,6 +14,10 @@ import com.pigeonstudios.russianpigeon.gamelogic.Seed;
  * Created by tosch on 10.08.2016.
  */
 public class GameScreen extends Screen {
+    private float time = 0;
+    private int FPSCounter = 0;
+    private int FPS = 0;
+
     private GameWorld gw = new GameWorld();
     public Control c = new Control(1080, 1920, game.getGraphics());
 
@@ -39,7 +43,17 @@ public class GameScreen extends Screen {
         for(int i = 0; i < gw.countSeeds; i++){
             gw.seeds.get(i).draw(game.getGraphics());
         }
-        game.getGraphics().drawText(String.valueOf(gw.FPS),0,100,Color.BLUE);
+
+        time += deltaTime;
+        if(time >= 1){
+            time = 0;
+            FPS = FPSCounter;
+            FPSCounter = 0;
+        } else {
+            FPSCounter++;
+        }
+        game.getGraphics().drawText(String.valueOf(FPS), 0, 50, Color.GREEN);
+
     }
 
     @Override
