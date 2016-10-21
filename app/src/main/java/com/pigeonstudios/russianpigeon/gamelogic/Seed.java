@@ -15,8 +15,6 @@ public class Seed extends Drawable {
 
     }
 
-   // private int x = this.getX();
-    //private int y = this.getY();
     private int xspeed = 6;
     private int yspeed = 6;
     private boolean moveRight = false;
@@ -25,11 +23,13 @@ public class Seed extends Drawable {
     private Random random = new Random();
     boolean kill;
 
+    public void update(){
+        move();
+    }
+
     public void move(){
 
         if(moveRight){
-            //x+=xspeed*direction;
-           // y+=yspeed;
             if(getX()>=1045){
                 moveRight = false;
                 moveLeft = true;
@@ -37,8 +37,6 @@ public class Seed extends Drawable {
             }
             this.setNewLocation(getX()+(xspeed*direction),getY()+yspeed);
         }else if(moveLeft){
-            //x-=xspeed*direction;
-            //y+=yspeed;
             if(getX()<=0){
                 moveRight = true;
                 moveLeft = false;
@@ -49,11 +47,6 @@ public class Seed extends Drawable {
 
     }
 
-    //just for testing
-    public void moveUp(){
-       // y-=yspeed;
-        //this.setNewLocation(x,y);
-    }
 
     private void setDirection(){
         direction = random.nextInt(3);

@@ -18,19 +18,18 @@ public class GameWorld {
     public int countSeeds = 0;
     public LinkedList<Seed> seeds = new LinkedList<Seed>();
     static private float time = 0;
-    static private int updateCount = 0;
 
     public GameWorld() {
 
     }
 
     public void update(float deltaTime) {
-        pigeon.move();
-        enemy.move();
+        pigeon.update();
+        enemy.update();
 
         generateSeeds(deltaTime);
-        moveSeeds();
-        isCatched();
+        updateSeeds();
+        isCaught();
 
     }
 
@@ -38,22 +37,25 @@ public class GameWorld {
     public void generateSeeds(float deltaTime) {
         time += deltaTime;
         if (time >= 0.5) {
-            seeds.add(new Seed(AssetSingleton.instance.getSeed(), enemy.getX(), enemy.getY() + 75));
-            countSeeds++;
-
-            updateCount = 0;
+            if (countSeeds>=10){
+                seeds.removeFirst();
+                seeds.add(new Seed(AssetSingleton.instance.getSeed(), enemy.getX(), enemy.getY() + 75));
+            }else {
+                seeds.add(new Seed(AssetSingleton.instance.getSeed(), enemy.getX(), enemy.getY() + 75));
+                countSeeds++;
+            }
             time = 0;
         }
-        updateCount++;
+
     }
 
-    public void moveSeeds() {
+    public void updateSeeds() {
         for (Seed s : seeds) {
-            s.move();
+            s.update();
         }
     }
 
-    public void isCatched() {
+    public void isCaught() {
         //testing code
 
         for (Seed s : seeds) {

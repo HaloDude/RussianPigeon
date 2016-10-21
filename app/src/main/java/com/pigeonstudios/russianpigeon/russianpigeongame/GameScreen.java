@@ -24,7 +24,7 @@ public class GameScreen extends Screen {
     public GameScreen(Game game) {
         super(game);
         gw.enemy = new Enemy(AssetSingleton.instance.getEnemy(), 0, 0);
-        gw.pigeon = new Pigeon(AssetSingleton.instance.getPigeon(), 300, 1000);
+        gw.pigeon = new Pigeon(AssetSingleton.instance.getPigeon(), 1080-680, 1920-600);
     }
 
     @Override

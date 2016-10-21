@@ -12,16 +12,16 @@ import java.util.List;
  */
 public class Control {
     private boolean touched = false;
-    public int x;
-    public int y;
+    static public int x;
+    static public int y;
     private ControlBall controlBall;
     private Graphics g;
 
     public Control(int screenWidth, int screenHeight, Graphics g){
         this.g = g;
-        AssetSingleton.instance.setControlBall(g.newScaledPixmap("Control/controlBall.png", Graphics.PixmapFormat.RGB565, 300, 300));
+        AssetSingleton.instance.setControlBall(g.newScaledPixmap("Control/controlBall.png", Graphics.PixmapFormat.RGB565, 100, 100));
         this.x = 300;
-        this.y = 1100;
+        this.y = 1700;
         this.controlBall = new ControlBall(AssetSingleton.instance.getControlBall(), x, y);
     }
 
@@ -31,6 +31,7 @@ public class Control {
             if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_DRAGGED && controlBall.isTouched(touchEvents.get(i)) ) {
                 this.x = touchEvents.get(i).x - (AssetSingleton.instance.getControlBall().getHeight()/2);
                 controlBall.setNewLocation(this.x,this.y);
+
             }
         }
     }

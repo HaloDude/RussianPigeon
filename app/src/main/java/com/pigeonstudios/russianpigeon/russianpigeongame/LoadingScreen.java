@@ -16,8 +16,8 @@ public class LoadingScreen extends Screen {
         //load assets here
         AssetSingleton.instance.setEnemy(game.getGraphics().newScaledPixmap("Sprites/2040120.png", Graphics.PixmapFormat.RGB565, 300, 300));
         AssetSingleton.instance.setSeed(game.getGraphics().newScaledPixmap("Sprites/seed.png", Graphics.PixmapFormat.RGB565, 35, 70));
-        AssetSingleton.instance.setBackground(game.getGraphics().newPixmap("Sprites/bg1.jpg", Graphics.PixmapFormat.RGB565));
-        AssetSingleton.instance.setPigeon(game.getGraphics().newScaledPixmap("Sprites/1.jpg", Graphics.PixmapFormat.RGB565, 200, 200));
+        AssetSingleton.instance.setBackground(game.getGraphics().newScaledPixmap("Sprites/bg1.jpg", Graphics.PixmapFormat.RGB565, 1080, 1920));
+        AssetSingleton.instance.setPigeon(game.getGraphics().newPixmap("Sprites/1.jpg", Graphics.PixmapFormat.RGB565));
         //=================//
         finishedLoading = true;
     }
