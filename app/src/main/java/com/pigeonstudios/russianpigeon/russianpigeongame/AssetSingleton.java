@@ -10,12 +10,15 @@ import java.util.LinkedList;
 public class AssetSingleton {
     public final static AssetSingleton instance = new AssetSingleton();
 
+    private Pixmap loadingScreen;
     private Pixmap background;
     private Pixmap pigeon;
     private Pixmap startButton;
     private Pixmap enemy;
     private Pixmap seed;
     private Pixmap controlBall;
+
+    private AssetSingleton(){}
 
     public Pixmap getSeed() {
         return seed;
@@ -25,7 +28,14 @@ public class AssetSingleton {
         this.seed = seed;
     }
 
-    private AssetSingleton(){}
+    public Pixmap getLoadingScreen() {
+        return loadingScreen;
+    }
+
+    public void setLoadingScreen(Pixmap loadingScreen) {
+        this.loadingScreen = loadingScreen;
+    }
+
 
     public Pixmap getEnemy() {
         return enemy;
