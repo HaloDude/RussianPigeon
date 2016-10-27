@@ -74,8 +74,6 @@ public class AndroidGraphics implements Graphics {
         else
             format = PixmapFormat.ARGB8888;
 
-        bitmap = autoScaleToScreen(bitmap);
-
         return new AndroidPixmap(bitmap, format);
     }
 
@@ -123,8 +121,6 @@ public class AndroidGraphics implements Graphics {
         else
             format = PixmapFormat.ARGB8888;
 
-        resizedBitmap = autoScaleToScreen(resizedBitmap);
-
         return new AndroidPixmap(resizedBitmap, format);
     }
 
@@ -165,24 +161,7 @@ public class AndroidGraphics implements Graphics {
         else
             format = PixmapFormat.ARGB8888;
 
-        cropedBitmap = autoScaleToScreen(cropedBitmap);
-
         return new AndroidPixmap(cropedBitmap, format);
-    }
-
-    public Bitmap autoScaleToScreen(Bitmap bitmap){
-        //scale the pixmap to fit the size of the different screens
-
-        //resize
-        float scaleWidth = (((float) bitmap.getWidth() * AndroidGame.getScaleX()) / bitmap.getWidth());
-        float scaleHeight = (((float) bitmap.getHeight() * AndroidGame.getScaleY()) / bitmap.getHeight());
-        //Matrix for resize
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
-
-        //create a new bitmap
-        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false);
-        return resizedBitmap;
     }
 
     @Override

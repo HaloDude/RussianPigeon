@@ -63,11 +63,12 @@ public class AndroidGame extends Activity implements Game {
         //frameBufferHeight = 1920;
         Bitmap frameBuffer = Bitmap.createBitmap(frameBufferWidth,
                 frameBufferHeight, Bitmap.Config.RGB_565);
+
         //find out the scaling factor if needed
         float scaleX = (float) frameBufferWidth
                 / getWindowManager().getDefaultDisplay().getWidth();
         float scaleY = (float) frameBufferHeight
-                / getWindowManager().getDefaultDisplay().getHeight();
+                / getWindowManager().getDefaultDisplay().getHeight();;
 
         //save the screen props for the Drawable classes
         this.actualScreenWidth = getWindowManager().getDefaultDisplay().getWidth();
