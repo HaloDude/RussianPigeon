@@ -1,4 +1,4 @@
-package com.pigeonstudios.russianpigeon.russianpigeongame;
+package com.pigeonstudios.russianpigeon.screens;
 
 import android.graphics.Color;
 
@@ -9,6 +9,8 @@ import com.pigeonstudios.russianpigeon.gamelogic.Enemy;
 import com.pigeonstudios.russianpigeon.gamelogic.GameWorld;
 import com.pigeonstudios.russianpigeon.gamelogic.Pigeon;
 import com.pigeonstudios.russianpigeon.gamelogic.Seed;
+import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
+import com.pigeonstudios.russianpigeon.russianpigeongame.Control;
 
 /**
  * Created by tosch on 10.08.2016.

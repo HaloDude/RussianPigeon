@@ -1,8 +1,9 @@
-package com.pigeonstudios.russianpigeon.russianpigeongame;
+package com.pigeonstudios.russianpigeon.screens;
 
 import com.pigeonstudios.russianpigeon.framework.Game;
 import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
+import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
 
 /**
  * Created by DennisFedorchuk on 10/19/2016.
@@ -30,7 +31,7 @@ public class LoadingScreen extends Screen {
         if(i==200) finishedAnimation = true;
 
         if(finishedLoading && finishedAnimation)
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new MenuScreen(game));
     }
 
     @Override

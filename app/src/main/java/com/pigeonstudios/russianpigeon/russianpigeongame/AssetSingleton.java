@@ -11,6 +11,7 @@ public class AssetSingleton {
     public final static AssetSingleton instance = new AssetSingleton();
 
     private Pixmap loadingScreen;
+    private Pixmap menuScreen;
     private Pixmap background;
     private Pixmap pigeon;
     private Pixmap startButton;
@@ -19,6 +20,14 @@ public class AssetSingleton {
     private Pixmap controlBall;
 
     private AssetSingleton(){}
+
+    public Pixmap getMenuScreen() {
+        return menuScreen;
+    }
+
+    public void setMenuScreen(Pixmap menuScreen) {
+        this.menuScreen = menuScreen;
+    }
 
     public Pixmap getSeed() {
         return seed;

@@ -18,8 +18,7 @@ import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.audio.Audio;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
-import com.pigeonstudios.russianpigeon.russianpigeongame.GameScreen;
-import com.pigeonstudios.russianpigeon.russianpigeongame.LoadingScreen;
+import com.pigeonstudios.russianpigeon.screens.LoadingScreen;
 
 /**
  * Created by DennisFedorchuk on 8/2/2016.

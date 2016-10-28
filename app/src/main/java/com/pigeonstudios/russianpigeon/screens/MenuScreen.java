@@ -1,10 +1,12 @@
-package com.pigeonstudios.russianpigeon.russianpigeongame;
+package com.pigeonstudios.russianpigeon.screens;
 
 import com.pigeonstudios.russianpigeon.androidimpl.Input.AndroidInput;
 import com.pigeonstudios.russianpigeon.framework.Game;
 import com.pigeonstudios.russianpigeon.framework.Input.TouchEvent;
 import com.pigeonstudios.russianpigeon.framework.Screen;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics.PixmapFormat;
+import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
+import com.pigeonstudios.russianpigeon.russianpigeongame.Button;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,10 +20,10 @@ public class MenuScreen extends Screen {
     public MenuScreen(Game game) {
         super(game);
 
-        //AssetSingleton.instance.setBackground(game.getGraphics().newPixmap("Menu/Background.jpg", PixmapFormat.RGB565));
+        AssetSingleton.instance.setMenuScreen(game.getGraphics().newPixmap("Menu/menuScreen.jpg", PixmapFormat.RGB565));
         AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Menu/StartButton.png", PixmapFormat.ARGB4444, 300, 200));
 
-        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 100, 100);
+        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 390, 500);
     }
 
     @Override
@@ -32,7 +34,7 @@ public class MenuScreen extends Screen {
         for(int i = 0; i < touchEvents.size(); i++) {
             if (touchEvents.get(i).type == TouchEvent.TOUCH_UP) {
                 if (startButton.isTouched(touchEvents.get(i))) {
-                    startButton.setNewLocation(startButton.getX() + 50, 1200);
+                    game.setScreen(new GameScreen(game));
             }
             }
         }
@@ -41,7 +43,7 @@ public class MenuScreen extends Screen {
 
     @Override
     public void draw(float deltaTime) {
-        game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
+        game.getGraphics().drawPixmap(AssetSingleton.instance.getMenuScreen(), 0, 0);
         startButton.draw(game.getGraphics());
     }
 
