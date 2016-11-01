@@ -27,10 +27,11 @@ public class Pigeon extends Drawable {
             moveRight = false;
             moveLeft = true;
         }
-        if(moveRight){
+
+        if(moveRight && getX()<1080-this.getPixmap().getWidth()){
             setNewLocation(getX()+5,getY());
         }
-        if(moveLeft){
+        if(moveLeft && getX()>0){
             setNewLocation(getX()-5,getY());
         }
 

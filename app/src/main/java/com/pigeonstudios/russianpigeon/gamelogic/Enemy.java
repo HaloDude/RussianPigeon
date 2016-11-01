@@ -24,7 +24,7 @@ public class Enemy extends Drawable{
     public void move(){
         if(moveRight){
             x+=speed;
-            if(x >= (1080-450)){
+            if(x >= (1080-this.getPixmap().getWidth())){
                 moveRight = false;
                 moveLeft = true;
                 return;
