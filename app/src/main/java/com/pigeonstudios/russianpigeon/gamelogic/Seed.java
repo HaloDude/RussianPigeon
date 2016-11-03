@@ -21,7 +21,8 @@ public class Seed extends Drawable {
     private boolean moveLeft = false;
     private int direction;
     private Random random = new Random();
-    boolean kill;
+    boolean skiped = false;
+    boolean catched = false;
 
     public void update(){
         move();

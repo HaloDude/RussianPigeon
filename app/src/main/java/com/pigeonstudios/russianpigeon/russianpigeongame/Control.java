@@ -19,7 +19,7 @@ public class Control {
 
     public Control(int screenWidth, int screenHeight, Graphics g){
         this.g = g;
-        AssetSingleton.instance.setControlBall(g.newScaledPixmap("Control/controlBall.png", Graphics.PixmapFormat.RGB565, 100, 100));
+        AssetSingleton.instance.setControlBall(g.newScaledPixmap("Control/controlBall.png", Graphics.PixmapFormat.RGB565, 200, 200));
         this.x = 300;
         this.y = 1700;
         this.controlBall = new ControlBall(AssetSingleton.instance.getControlBall(), x, y);
