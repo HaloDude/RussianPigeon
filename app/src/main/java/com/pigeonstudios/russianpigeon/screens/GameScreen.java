@@ -36,11 +36,17 @@ public class GameScreen extends Screen {
     private GameWorld gw;
     public Control c;
 
+    //buttons
+    private Button menuButton;
+    private Button restartButton;
+
 
     public GameScreen(Game game) {
         super(game);
         gw = new GameWorld();
         c = new Control(1080, 1920, game.getGraphics());
+        this.menuButton = new Button(AssetSingleton.instance.getMenuButton(), 240, 1100);
+        this.restartButton = new Button(AssetSingleton.instance.getRestartButton(), 240, 850);
     }
 
     @Override
@@ -84,9 +90,15 @@ public class GameScreen extends Screen {
     }
 
     private void updateGameOver(){
-        if(game.getInput().getTouchEvents().size()>0){
-            state = GameState.Ready;
-            game.setScreen(new GameScreen(game));
+        List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
+        for(int i = 0; i < touchEvents.size(); i++) {
+            if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_UP) {
+                if (restartButton.isTouched(touchEvents.get(i))) {
+                    game.setScreen(new GameScreen(game));
+                }else if (menuButton.isTouched(touchEvents.get(i))) {
+                    game.setScreen(new MenuScreen(game));
+                }
+            }
         }
     }
 
@@ -130,7 +142,7 @@ public class GameScreen extends Screen {
     }
 
     private void drawReady(){
-        game.getGraphics().drawPixmap(AssetSingleton.instance.getReady(), 300, 700);
+        game.getGraphics().drawPixmap(AssetSingleton.instance.getReady(), 40, 700);
     }
 
     private void drawRunning(){
@@ -144,7 +156,9 @@ public class GameScreen extends Screen {
     }
 
     private void drawGameOver(){
-        game.getGraphics().drawPixmap(AssetSingleton.instance.getGameOver(), 300, 700);
+        game.getGraphics().drawPixmap(AssetSingleton.instance.getGameOver(), 300, 400);
+        menuButton.draw(game.getGraphics());
+        restartButton.draw(game.getGraphics());
     }
 
 

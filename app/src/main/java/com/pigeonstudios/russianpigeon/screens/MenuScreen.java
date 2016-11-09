@@ -31,7 +31,7 @@ public class MenuScreen extends Screen {
             if (touchEvents.get(i).type == TouchEvent.TOUCH_UP) {
                 if (startButton.isTouched(touchEvents.get(i))) {
                     game.setScreen(new GameScreen(game));
-            }
+                }
             }
         }
 
