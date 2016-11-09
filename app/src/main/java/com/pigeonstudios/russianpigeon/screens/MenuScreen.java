@@ -19,10 +19,6 @@ public class MenuScreen extends Screen {
 
     public MenuScreen(Game game) {
         super(game);
-
-        AssetSingleton.instance.setMenuScreen(game.getGraphics().newPixmap("Menu/menuScreen.jpg", PixmapFormat.RGB565));
-        AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Menu/StartButton.png", PixmapFormat.ARGB4444, 300, 200));
-
         this.startButton = new Button(AssetSingleton.instance.getStartButton(), 390, 500);
     }
 

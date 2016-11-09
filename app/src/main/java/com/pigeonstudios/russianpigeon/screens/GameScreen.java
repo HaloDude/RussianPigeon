@@ -12,6 +12,7 @@ import com.pigeonstudios.russianpigeon.gamelogic.GameWorld;
 import com.pigeonstudios.russianpigeon.gamelogic.Pigeon;
 import com.pigeonstudios.russianpigeon.gamelogic.Seed;
 import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
+import com.pigeonstudios.russianpigeon.russianpigeongame.Button;
 import com.pigeonstudios.russianpigeon.russianpigeongame.Control;
 
 import java.util.List;
@@ -33,11 +34,13 @@ public class GameScreen extends Screen {
     private int FPS = 0;
 
     private GameWorld gw;
-    public Control c = new Control(1080, 1920, game.getGraphics());
+    public Control c;
+
 
     public GameScreen(Game game) {
         super(game);
         gw = new GameWorld();
+        c = new Control(1080, 1920, game.getGraphics());
     }
 
     @Override
@@ -59,6 +62,8 @@ public class GameScreen extends Screen {
     }
 
     private void updateReady(){
+        game.getInput().getKeyEvents();
+
         if(game.getInput().getTouchEvents().size()>0){
             state = GameState.Running;
         }
@@ -88,6 +93,8 @@ public class GameScreen extends Screen {
     @Override
     public void draw(float deltaTime) {
 
+        drawWorld();
+
         if(state == GameState.Ready){
             drawReady();
         }
@@ -115,19 +122,18 @@ public class GameScreen extends Screen {
 
     }
 
-    private void drawReady(){
+    private void drawWorld(){
         game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
         gw.pigeon.draw(game.getGraphics());
         gw.enemy.draw(game.getGraphics());
         c.draw();
-        game.getGraphics().drawText("Готов блеать???", 300, 800, Color.RED);
+    }
+
+    private void drawReady(){
+        game.getGraphics().drawPixmap(AssetSingleton.instance.getReady(), 300, 700);
     }
 
     private void drawRunning(){
-        game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
-        gw.pigeon.draw(game.getGraphics());
-        gw.enemy.draw(game.getGraphics());
-        c.draw();
         for(int i = 0; i < gw.countSeeds; i++){
             gw.seeds.get(i).draw(game.getGraphics());
         }
@@ -138,11 +144,7 @@ public class GameScreen extends Screen {
     }
 
     private void drawGameOver(){
-        game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
-        gw.pigeon.draw(game.getGraphics());
-        gw.enemy.draw(game.getGraphics());
-        c.draw();
-        game.getGraphics().drawText("Ебать ты лох", 300, 800, Color.RED);
+        game.getGraphics().drawPixmap(AssetSingleton.instance.getGameOver(), 300, 700);
     }
 
 

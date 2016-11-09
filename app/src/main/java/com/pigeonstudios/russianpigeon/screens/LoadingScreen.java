@@ -21,6 +21,10 @@ public class LoadingScreen extends Screen {
         AssetSingleton.instance.setSeed(game.getGraphics().newScaledPixmap("Sprites/seed.png", Graphics.PixmapFormat.RGB565, 35, 70));
         AssetSingleton.instance.setBackground(game.getGraphics().newScaledPixmap("Sprites/Background.jpg", Graphics.PixmapFormat.RGB565, 1080, 1920));
         AssetSingleton.instance.setPigeon(game.getGraphics().newScaledPixmap("Sprites/Pigeon.png", Graphics.PixmapFormat.RGB565, 250,250));
+        AssetSingleton.instance.setMenuScreen(game.getGraphics().newPixmap("Menu/menuScreen.jpg", Graphics.PixmapFormat.RGB565));
+        AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Menu/StartButton.png", Graphics.PixmapFormat.ARGB4444, 300, 200));
+        AssetSingleton.instance.setReady(game.getGraphics().newPixmap("Menu/ready.png", Graphics.PixmapFormat.RGB565));
+        AssetSingleton.instance.setGameOver(game.getGraphics().newPixmap("Menu/gameOver.png", Graphics.PixmapFormat.RGB565));
         //=================//
         finishedLoading = true;
     }

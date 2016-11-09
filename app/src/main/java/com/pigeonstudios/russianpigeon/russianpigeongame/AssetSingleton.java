@@ -18,8 +18,26 @@ public class AssetSingleton {
     private Pixmap enemy;
     private Pixmap seed;
     private Pixmap controlBall;
+    private Pixmap ready;
+    private Pixmap gameOver;
 
     private AssetSingleton(){}
+
+    public Pixmap getGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(Pixmap gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public Pixmap getReady() {
+        return ready;
+    }
+
+    public void setReady(Pixmap ready) {
+        this.ready = ready;
+    }
 
     public Pixmap getMenuScreen() {
         return menuScreen;
@@ -44,7 +62,6 @@ public class AssetSingleton {
     public void setLoadingScreen(Pixmap loadingScreen) {
         this.loadingScreen = loadingScreen;
     }
-
 
     public Pixmap getEnemy() {
         return enemy;
