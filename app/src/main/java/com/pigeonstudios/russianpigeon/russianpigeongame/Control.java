@@ -32,9 +32,11 @@ public class Control {
     public void update(List<Input.TouchEvent> touchEvents){
         int pos = 0;
         for(int i = 0; i < touchEvents.size(); i++) {
-            if(touchEvents.get(i).type == Input.TouchEvent.TOUCH_DRAGGED){
+            if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_DRAGGED && controlBall.isTouched(touchEvents.get(i))) {
                 touched = true;
-            }else if(touchEvents.get(i).type == Input.TouchEvent.TOUCH_UP){
+            } else if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_UP) {
+                touched = false;
+            }else if(!controlBall.isTouched(touchEvents.get(i)) ){
                 touched = false;
             }
             if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_DRAGGED && controlBall.isTouched(touchEvents.get(i))) {
@@ -42,28 +44,11 @@ public class Control {
                     pos = touchEvents.get(i).x - g.getWidth() / 2;
                     accel = ((float) (1) * (float) (pos)) / (float) 440;
                 } else {
-                    pos = 540 - touchEvents.get(i).x;
+                    pos = 440 - (touchEvents.get(i).x);
                     accel = ((float) (-1) * (float) (pos)) / (float) 440;
                 }
                 if (touchEvents.get(i).x > ballWidth && touchEvents.get(i).x <= g.getWidth() - ballWidth) {
                     this.x = (int) ((touchEvents.get(i).x - ballHeight));
-                }
-            }
-            if (touched == false) {
-                if (this.x > 540) {
-                    this.x -= 10;
-                    if (this.x <= 540)
-                        this.x = 540;
-                    pos = this.x - 540;
-                    accel = ((float) (1) * (float) (pos)) / (float) 440;
-                }
-
-                if (this.x < 540) {
-                    this.x += 10;
-                    if (this.x >= 540)
-                        this.x = 540;
-                    pos = 540 - this.x;
-                    accel = ((float) (-1) * (float) (pos)) / (float) 440;
                 }
             }
         }
@@ -73,7 +58,7 @@ public class Control {
                 this.x -= 10;
                 if (this.x <= 540-ballWidth)
                     this.x = 540-ballWidth;
-                pos = this.x - 540;
+                pos = (this.x+ballWidth) - 540;
                 accel = ((float) (1) * (float) (pos)) / (float) 440;
             }
 
@@ -81,12 +66,19 @@ public class Control {
                 this.x += 10;
                 if (this.x >= 540 -ballWidth)
                     this.x = 540 - ballWidth;
-                pos = 540 - this.x;
+                pos = 540 - (this.x+ballWidth);
                 accel = ((float) (-1) * (float) (pos)) / (float) 440;
             }
         }
+
         controlBall.setNewLocation(this.x, this.y);
-        targetX += 10 * accel;
+        if(targetX > 870){
+            targetX = (int)(830-(200*accel));
+        } else if ( targetX<-40) {
+            targetX = (int)(0 - (200*accel));
+        }else {
+            targetX += 15 * accel;
+        }
     }
 
     public void draw(){
@@ -108,7 +100,7 @@ public class Control {
 
         public boolean isTouched(Input.TouchEvent event) {
             if ((event.x > x - 70 && event.x < x + pixmap.getWidth() + 70)) {
-                if ((event.y > y && event.y < y + pixmap.getHeight() - 1))
+                if ((event.y > y - 20 && event.y < y + pixmap.getHeight() - 1))
                     return true;
                 return false;
             } else
