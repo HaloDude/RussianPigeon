@@ -13,6 +13,7 @@ public class Pigeon extends Drawable {
     boolean moveLeft = false;
     public Pigeon(Pixmap pixmap, int x, int y) {
         super(pixmap, x, y);
+
     }
 
     public void update(){
@@ -20,21 +21,7 @@ public class Pigeon extends Drawable {
     }
 
     public void move(){
-        if(Control.x>450){
-            moveRight = true;
-            moveLeft = false;
-        }else{
-            moveRight = false;
-            moveLeft = true;
-        }
-
-        if(moveRight && getX()<1080-this.getPixmap().getWidth()){
-            setNewLocation(getX()+5,getY());
-        }
-        if(moveLeft && getX()>0){
-            setNewLocation(getX()-5,getY());
-        }
-
+        setNewLocation(Control.targetX, 1320);
     }
 
 
