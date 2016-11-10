@@ -16,14 +16,16 @@ public class LoadingScreen extends Screen {
     public LoadingScreen(Game game) {
         super(game);
         //load assets here
-        AssetSingleton.instance.setLoadingScreen(game.getGraphics().newScaledPixmap("Menu/loadingScreen.jpg", Graphics.PixmapFormat.RGB565, 1080, 1920));
+        AssetSingleton.instance.setLoadingScreen(game.getGraphics().newScaledPixmap("Screens/loadingScreen.jpg", Graphics.PixmapFormat.RGB565, 1080, 1920));
         AssetSingleton.instance.setEnemy(game.getGraphics().newScaledPixmap("Sprites/Enemy.png", Graphics.PixmapFormat.RGB565, 300, 300));
         AssetSingleton.instance.setSeed(game.getGraphics().newScaledPixmap("Sprites/seed.png", Graphics.PixmapFormat.RGB565, 35, 70));
-        AssetSingleton.instance.setBackground(game.getGraphics().newScaledPixmap("Sprites/Background.jpg", Graphics.PixmapFormat.RGB565, 1080, 1920));
+        AssetSingleton.instance.setBackground(game.getGraphics().newScaledPixmap("Screens/Background.jpg", Graphics.PixmapFormat.RGB565, 1080, 1920));
         AssetSingleton.instance.setPigeon(game.getGraphics().newScaledPixmap("Sprites/Pigeon.png", Graphics.PixmapFormat.RGB565, 250,250));
-        AssetSingleton.instance.setMenuScreen(game.getGraphics().newPixmap("Menu/menuScreen.jpg", Graphics.PixmapFormat.RGB565));
-        AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Menu/StartButton.png", Graphics.PixmapFormat.ARGB4444, 300, 200));
-        AssetSingleton.instance.setReady(game.getGraphics().newPixmap("Menu/ready.png", Graphics.PixmapFormat.RGB565));
+        AssetSingleton.instance.setMenuScreen(game.getGraphics().newPixmap("Screens/menuScreen.jpg", Graphics.PixmapFormat.RGB565));
+        AssetSingleton.instance.setMenuButton(game.getGraphics().newPixmap("Buttons/menuButton.png", Graphics.PixmapFormat.ARGB4444));
+        AssetSingleton.instance.setRestartButton(game.getGraphics().newPixmap("Buttons/restartButton.png", Graphics.PixmapFormat.ARGB4444));
+        AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Buttons/StartButton.png", Graphics.PixmapFormat.ARGB4444, 300, 200));
+        AssetSingleton.instance.setReady(game.getGraphics().newScaledPixmap("Menu/ready.png", Graphics.PixmapFormat.RGB565, 1000, 400));
         AssetSingleton.instance.setGameOver(game.getGraphics().newPixmap("Menu/gameOver.png", Graphics.PixmapFormat.RGB565));
         //=================//
         finishedLoading = true;
@@ -32,7 +34,7 @@ public class LoadingScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         i++;
-        if(i==200) finishedAnimation = true;
+        if(i==150) finishedAnimation = true;
 
         if(finishedLoading && finishedAnimation)
             game.setScreen(new MenuScreen(game));

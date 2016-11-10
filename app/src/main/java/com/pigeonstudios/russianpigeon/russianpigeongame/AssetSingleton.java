@@ -15,6 +15,8 @@ public class AssetSingleton {
     private Pixmap background;
     private Pixmap pigeon;
     private Pixmap startButton;
+    private Pixmap restartButton;
+    private Pixmap menuButton;
     private Pixmap enemy;
     private Pixmap seed;
     private Pixmap controlBall;
@@ -22,6 +24,22 @@ public class AssetSingleton {
     private Pixmap gameOver;
 
     private AssetSingleton(){}
+
+    public Pixmap getMenuButton() {
+        return menuButton;
+    }
+
+    public void setMenuButton(Pixmap menuButton) {
+        this.menuButton = menuButton;
+    }
+
+    public Pixmap getRestartButton() {
+        return restartButton;
+    }
+
+    public void setRestartButton(Pixmap restartButton) {
+        this.restartButton = restartButton;
+    }
 
     public Pixmap getGameOver() {
         return gameOver;
