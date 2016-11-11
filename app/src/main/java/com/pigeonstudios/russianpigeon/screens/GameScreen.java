@@ -39,6 +39,8 @@ public class GameScreen extends Screen {
     //buttons
     private Button menuButton;
     private Button restartButton;
+    private Button resumeButton;
+    private Button pauseButton;
 
 
     public GameScreen(Game game) {
@@ -47,6 +49,8 @@ public class GameScreen extends Screen {
         c = new Control(1080, 1920, game.getGraphics());
         this.menuButton = new Button(AssetSingleton.instance.getMenuButton(), 240, 1100);
         this.restartButton = new Button(AssetSingleton.instance.getRestartButton(), 240, 850);
+        this.resumeButton = new Button(AssetSingleton.instance.getResumeButton(), 240, 600);
+        this.pauseButton = new Button(AssetSingleton.instance.getPauseButton(), 980, 0);
     }
 
     @Override
@@ -76,17 +80,44 @@ public class GameScreen extends Screen {
     }
 
     private void updateRunning(float deltaTime){
+        List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
         gw.update(deltaTime);
-        c.update(game.getInput().getTouchEvents());
+        c.update(touchEvents);
+
+        for(int i = 0; i < touchEvents.size(); i++) {
+            if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_UP) {
+                if (pauseButton.isTouched(touchEvents.get(i))) {
+                    state = GameState.Paused;
+                    return;
+                }
+            }
+        }
 
         //TODO need to delete this code, but not now
         if(gw.isSkiped()){
             state = GameState.GameOver;
+            return;
         }
+
+
     }
 
     private void updatePaused(){
-
+        List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
+        for(int i = 0; i < touchEvents.size(); i++) {
+            if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_UP) {
+                if (restartButton.isTouched(touchEvents.get(i))) {
+                    game.setScreen(new GameScreen(game));
+                    return;
+                }else if (menuButton.isTouched(touchEvents.get(i))) {
+                    game.setScreen(new MenuScreen(game));
+                    return;
+                }else if (resumeButton.isTouched(touchEvents.get(i))){
+                    state = GameState.Running;
+                    return;
+                }
+            }
+        }
     }
 
     private void updateGameOver(){
@@ -138,6 +169,7 @@ public class GameScreen extends Screen {
         game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
         gw.pigeon.draw(game.getGraphics());
         gw.enemy.draw(game.getGraphics());
+
         c.draw();
     }
 
@@ -146,13 +178,16 @@ public class GameScreen extends Screen {
     }
 
     private void drawRunning(){
+        pauseButton.draw(game.getGraphics());
         for(int i = 0; i < gw.countSeeds; i++){
             gw.seeds.get(i).draw(game.getGraphics());
         }
     }
 
     private void drawPaused(){
-
+        resumeButton.draw(game.getGraphics());
+        menuButton.draw(game.getGraphics());
+        restartButton.draw(game.getGraphics());
     }
 
     private void drawGameOver(){
@@ -164,7 +199,9 @@ public class GameScreen extends Screen {
 
     @Override
     public void pause() {
-
+        if(state == GameState.Running){
+            state = GameState.Paused;
+        }
     }
 
     @Override

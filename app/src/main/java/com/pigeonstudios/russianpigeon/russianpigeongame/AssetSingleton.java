@@ -16,6 +16,8 @@ public class AssetSingleton {
     private Pixmap pigeon;
     private Pixmap startButton;
     private Pixmap restartButton;
+    private Pixmap resumeButton;
+    private Pixmap pauseButton;
     private Pixmap menuButton;
     private Pixmap enemy;
     private Pixmap seed;
@@ -27,6 +29,22 @@ public class AssetSingleton {
 
     public Pixmap getMenuButton() {
         return menuButton;
+    }
+
+    public Pixmap getPauseButton() {
+        return pauseButton;
+    }
+
+    public void setPauseButton(Pixmap pauseButton) {
+        this.pauseButton = pauseButton;
+    }
+
+    public Pixmap getResumeButton() {
+        return resumeButton;
+    }
+
+    public void setResumeButton(Pixmap resumeButton) {
+        this.resumeButton = resumeButton;
     }
 
     public void setMenuButton(Pixmap menuButton) {
