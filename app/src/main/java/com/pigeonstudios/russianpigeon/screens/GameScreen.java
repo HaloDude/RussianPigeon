@@ -2,15 +2,10 @@ package com.pigeonstudios.russianpigeon.screens;
 
 import android.graphics.Color;
 
-import com.pigeonstudios.russianpigeon.MainActivity;
 import com.pigeonstudios.russianpigeon.framework.Game;
 import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.Screen;
-import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
-import com.pigeonstudios.russianpigeon.gamelogic.Enemy;
 import com.pigeonstudios.russianpigeon.gamelogic.GameWorld;
-import com.pigeonstudios.russianpigeon.gamelogic.Pigeon;
-import com.pigeonstudios.russianpigeon.gamelogic.Seed;
 import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
 import com.pigeonstudios.russianpigeon.russianpigeongame.Button;
 import com.pigeonstudios.russianpigeon.russianpigeongame.Control;
@@ -94,7 +89,7 @@ public class GameScreen extends Screen {
         }
 
         //TODO need to delete this code, but not now
-        if(gw.isSkiped()){
+        if(gw.isSkipped()){
             state = GameState.GameOver;
             return;
         }
@@ -169,7 +164,7 @@ public class GameScreen extends Screen {
         game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
         gw.pigeon.draw(game.getGraphics());
         gw.enemy.draw(game.getGraphics());
-
+        game.getGraphics().drawText("Score " + String.valueOf(gw.getScore()), 0, 100, Color.GREEN);
         c.draw();
     }
 

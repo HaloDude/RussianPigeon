@@ -17,11 +17,12 @@ public class GameWorld {
     public Enemy enemy;
     public Pigeon pigeon;
     public int countSeeds = 0;
+    private int score = 0;
     public LinkedList<Seed> seeds = new LinkedList<Seed>();
     static private float time = 0;
 
     public GameWorld() {
-        enemy = new Enemy(AssetSingleton.instance.getEnemy(), 0, 0);
+        enemy = new Enemy(AssetSingleton.instance.getEnemy(), 390, 0);
         pigeon = new Pigeon(AssetSingleton.instance.getPigeon(), 1080-680, 1920-600);
     }
 
@@ -63,11 +64,12 @@ public class GameWorld {
             if(getRect(pigeon).intersect(getRect(s))){
                 s.catched = true;
                 s.setNewLocation(3000,3000);
+                score++;
             }
         }
     }
 
-    public boolean isSkiped(){
+    public boolean isSkipped(){
         for (Seed s : seeds) {
             if(s.getY()>1920 && s.catched == false){
                 s.skiped = true;
@@ -82,5 +84,7 @@ public class GameWorld {
         return r;
     }
 
-
+    public int getScore(){
+        return score;
+    }
 }

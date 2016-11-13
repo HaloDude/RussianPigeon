@@ -16,10 +16,14 @@ import java.util.List;
  */
 public class MenuScreen extends Screen {
     private Button startButton;
+    private Button musicButton;
+    private Button soundButton;
 
     public MenuScreen(Game game) {
         super(game);
-        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 390, 500);
+        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 290, 500);
+        this.musicButton = new Button(AssetSingleton.instance.getMusicButton(), 200, 1500);
+        this.soundButton = new Button(AssetSingleton.instance.getSoundButton(), 630, 1500);
     }
 
     @Override
@@ -41,6 +45,8 @@ public class MenuScreen extends Screen {
     public void draw(float deltaTime) {
         game.getGraphics().drawPixmap(AssetSingleton.instance.getMenuScreen(), 0, 0);
         startButton.draw(game.getGraphics());
+        soundButton.draw(game.getGraphics());
+        musicButton.draw(game.getGraphics());
     }
 
     @Override

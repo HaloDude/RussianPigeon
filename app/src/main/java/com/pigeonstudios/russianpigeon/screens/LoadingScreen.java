@@ -26,7 +26,9 @@ public class LoadingScreen extends Screen {
         AssetSingleton.instance.setRestartButton(game.getGraphics().newPixmap("Buttons/restartButton.png", Graphics.PixmapFormat.ARGB4444));
         AssetSingleton.instance.setResumeButton(game.getGraphics().newPixmap("Buttons/resumeButton.png", Graphics.PixmapFormat.ARGB4444));
         AssetSingleton.instance.setPauseButton(game.getGraphics().newScaledPixmap("Buttons/pauseButton.png", Graphics.PixmapFormat.ARGB4444, 100, 100));
-        AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Buttons/StartButton.png", Graphics.PixmapFormat.ARGB4444, 300, 200));
+        AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Buttons/StartButton.png", Graphics.PixmapFormat.ARGB4444, 500, 500));
+        AssetSingleton.instance.setMusicButton(game.getGraphics().newScaledPixmap("Buttons/musicButton.png", Graphics.PixmapFormat.ARGB4444, 250, 250));
+        AssetSingleton.instance.setSoundButton(game.getGraphics().newScaledPixmap("Buttons/soundButton.png", Graphics.PixmapFormat.ARGB4444, 250, 250));
         AssetSingleton.instance.setReady(game.getGraphics().newScaledPixmap("Menu/ready.png", Graphics.PixmapFormat.RGB565, 1000, 400));
         AssetSingleton.instance.setGameOver(game.getGraphics().newPixmap("Menu/gameOver.png", Graphics.PixmapFormat.RGB565));
         //=================//

@@ -11,7 +11,7 @@ public class Enemy extends Drawable{
     public Enemy(Pixmap pixmap, int x, int y) {
         super(pixmap, x, y);
     }
-    private int x = 0;
+    private int x = 390;
     private int y = 0;
     private int speed = 4;
     private boolean moveRight = true;
