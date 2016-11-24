@@ -31,6 +31,7 @@ public class GameScreen extends Screen {
     private GameWorld gw;
     public Control c;
 
+
     //buttons
     private Button menuButton;
     private Button restartButton;
@@ -40,7 +41,7 @@ public class GameScreen extends Screen {
 
     public GameScreen(Game game) {
         super(game);
-        gw = new GameWorld();
+        gw = new GameWorld(game);
         c = new Control(1080, 1920, game.getGraphics());
         this.menuButton = new Button(AssetSingleton.instance.getMenuButton(), 240, 1100);
         this.restartButton = new Button(AssetSingleton.instance.getRestartButton(), 240, 850);
@@ -156,7 +157,7 @@ public class GameScreen extends Screen {
         } else {
             FPSCounter++;
         }
-        game.getGraphics().drawText(String.valueOf(FPS), 0, 50, Color.GREEN);
+        //game.getGraphics().drawText(String.valueOf(FPS), 0, 50, Color.GREEN);
 
     }
 
@@ -164,7 +165,7 @@ public class GameScreen extends Screen {
         game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
         gw.pigeon.draw(game.getGraphics());
         gw.enemy.draw(game.getGraphics());
-        game.getGraphics().drawText("Score " + String.valueOf(gw.getScore()), 0, 100, Color.GREEN);
+        //game.getGraphics().drawText("Score " + String.valueOf(gw.getScore()), 0, 100, Color.GREEN);
         c.draw();
     }
 

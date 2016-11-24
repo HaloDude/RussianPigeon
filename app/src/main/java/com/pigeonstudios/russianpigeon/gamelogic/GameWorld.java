@@ -4,6 +4,7 @@ package com.pigeonstudios.russianpigeon.gamelogic;
 import android.graphics.Rect;
 
 import com.pigeonstudios.russianpigeon.framework.Game;
+import com.pigeonstudios.russianpigeon.russianpigeongame.Animation;
 import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
 import com.pigeonstudios.russianpigeon.russianpigeongame.Drawable;
 
@@ -16,19 +17,22 @@ import java.util.LinkedList;
 public class GameWorld {
     public Enemy enemy;
     public Pigeon pigeon;
+    Animation pigeonAnimation;
     public int countSeeds = 0;
     private int score = 0;
     public LinkedList<Seed> seeds = new LinkedList<Seed>();
     static private float time = 0;
 
-    public GameWorld() {
+    public GameWorld(Game game) {
+        pigeonAnimation = new Animation(0.2f,game.getGraphics(), AssetSingleton.instance.getPigeon(),1,4);
         enemy = new Enemy(AssetSingleton.instance.getEnemy(), 390, 0);
-        pigeon = new Pigeon(AssetSingleton.instance.getPigeon(), 1080-680, 1920-600);
+        pigeon = new Pigeon(pigeonAnimation.getKeyFrame(0), 1080-680, 1920-600);
     }
 
     public void update(float deltaTime) {
-        pigeon.update();
+        pigeon.update(pigeonAnimation, deltaTime);
         enemy.update();
+
 
         generateSeeds(deltaTime);
         updateSeeds();

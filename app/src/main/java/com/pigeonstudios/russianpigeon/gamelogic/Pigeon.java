@@ -11,12 +11,14 @@ import com.pigeonstudios.russianpigeon.russianpigeongame.Drawable;
 public class Pigeon extends Drawable {
     boolean moveRight = false;
     boolean moveLeft = false;
+
     public Pigeon(Pixmap pixmap, int x, int y) {
         super(pixmap, x, y);
 
     }
 
-    public void update(){
+    public void update(Animation a, float deltaTime){
+        this.pixmap = a.getFrame(deltaTime);
         move();
     }
 

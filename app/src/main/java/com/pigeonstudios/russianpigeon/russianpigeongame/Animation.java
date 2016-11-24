@@ -15,7 +15,10 @@ import java.util.List;
  */
 public class Animation {
     private Pixmap spriteSheet;
-
+    private int number = 0;
+    private int frames;
+    private float time = 0;
+    private float uploadTime;
     private List<Pixmap> animationSequence = new ArrayList<Pixmap>();
 
     /**
@@ -23,26 +26,48 @@ public class Animation {
      * number of the row where the current animation sequence is located.
      * @param graphics - used to create the pixmaps
      * @param spriteSheet - spritesheet of all the animations
-     * @param rowNumber - the row number of the desired animation sequence
+     //* @param rowNumber - the row number of the desired animation sequence --- нахуя?
      * @param rows - the amount of rows there are. used to claculate width and height
      * @param columns - amount of columns that he animation sequence is taking up
      */
-    public Animation(Graphics graphics, Pixmap spriteSheet, int rowNumber, int rows, int columns){
+    public Animation(float uploadTime, Graphics graphics, Pixmap spriteSheet, int rows, int columns){
         this.spriteSheet = spriteSheet;
-
+        this.uploadTime = uploadTime;
+        frames = columns;
 
         //extreact the animation and put it in the arraylist
         int width = spriteSheet.getWidth()/columns;
         int height = spriteSheet.getHeight()/ rows;
 
         for(int i = 0; i < columns; i++){
-           // animationSequence.add(graphics.newPixmap());
+            animationSequence.add(graphics.newCropedPixmap("Sprites/pigeonSprite.png", Graphics.PixmapFormat.RGB565, (spriteSheet.getWidth()/columns)*i, 0, spriteSheet.getWidth()/columns, spriteSheet.getHeight()));
         }
     }
 
-    public Pixmap nextAnimation(){return null;}
+    public Pixmap getFrame(float deltaTime){
+        time += deltaTime;
+        if(time >= uploadTime){
+            number ++;
+            if(number == frames){
+                number = 0;
+            }
+            time = 0;
+        }
+        return animationSequence.get(number);
+    }
+
+    public Pixmap nextAnimation(){
+        number++;
+        return animationSequence.get(number);
+    }
 
     public Pixmap prevAnimation(){
-        return null;
+        number--;
+        return animationSequence.get(number);
+    }
+
+    public Pixmap getKeyFrame(int n){
+        number = n;
+        return animationSequence.get(number);
     }
 }
