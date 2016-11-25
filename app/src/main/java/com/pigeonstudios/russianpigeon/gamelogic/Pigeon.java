@@ -23,9 +23,7 @@ public class Pigeon extends Drawable {
     }
 
     public void move(){
-        if(Control.targetX<1080-this.getPixmap().getWidth() && Control.targetX>0){
-            setNewLocation(Control.targetX, 1320);
-        }
+        setNewLocation(Control.targetX, 1320);
     }
 
 

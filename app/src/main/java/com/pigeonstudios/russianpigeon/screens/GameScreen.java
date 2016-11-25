@@ -42,7 +42,7 @@ public class GameScreen extends Screen {
     public GameScreen(Game game) {
         super(game);
         gw = new GameWorld(game);
-        c = new Control(1080, 1920, game.getGraphics());
+        c = new Control(game.getGraphics(), gw.pigeon.getPixmap());
         this.menuButton = new Button(AssetSingleton.instance.getMenuButton(), 240, 1100);
         this.restartButton = new Button(AssetSingleton.instance.getRestartButton(), 240, 850);
         this.resumeButton = new Button(AssetSingleton.instance.getResumeButton(), 240, 600);
