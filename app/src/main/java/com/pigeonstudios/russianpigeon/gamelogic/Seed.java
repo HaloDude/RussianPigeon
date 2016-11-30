@@ -8,15 +8,15 @@ import java.util.Random;
  * Created by tosch on 11.08.2016.
  */
 public class Seed extends Drawable {
-    public Seed(Pixmap pixmap, int x, int y) {
+    public Seed(Pixmap pixmap, int x, int y, int speed) {
         super(pixmap, x, y);
         setSide();
         setDirection();
-
+        yspeed = speed;
     }
 
     private int xspeed = 6;
-    private int yspeed = 6;
+    private int yspeed;
     private boolean moveRight = false;
     private boolean moveLeft = false;
     private int direction;
@@ -58,6 +58,10 @@ public class Seed extends Drawable {
     private void setSide(){
         moveRight = random.nextBoolean();
         moveLeft = !moveRight;
+    }
+
+    public void setSpeed(int x){
+        this.yspeed = x;
     }
 
 

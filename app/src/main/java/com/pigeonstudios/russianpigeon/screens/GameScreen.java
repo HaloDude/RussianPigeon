@@ -89,7 +89,7 @@ public class GameScreen extends Screen {
             }
         }
 
-        //TODO need to delete this code, but not now
+
         if(gw.isSkipped()){
             state = GameState.GameOver;
             return;
@@ -157,7 +157,7 @@ public class GameScreen extends Screen {
         } else {
             FPSCounter++;
         }
-        //game.getGraphics().drawText(String.valueOf(FPS), 0, 50, Color.GREEN);
+        game.getGraphics().drawText(String.valueOf(FPS), 0, 50, Color.GREEN);
 
     }
 
@@ -165,7 +165,7 @@ public class GameScreen extends Screen {
         game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
         gw.pigeon.draw(game.getGraphics());
         gw.enemy.draw(game.getGraphics());
-        //game.getGraphics().drawText("Score " + String.valueOf(gw.getScore()), 0, 100, Color.GREEN);
+        game.getGraphics().drawText("Score " + String.valueOf(gw.getScore()), 0, 100, Color.GREEN);
         c.draw();
     }
 
