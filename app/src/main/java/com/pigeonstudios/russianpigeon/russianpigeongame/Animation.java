@@ -42,10 +42,15 @@ public class Animation {
         int height = spriteSheet.getHeight()/ rows;
 
         for(int i = 0; i < columns; i++){
-            animationSequence.add(spriteSheet.cropPixmap(width*i, height*(sequenceRow-1), width, height));
+            animationSequence.add(spriteSheet.cropPixmap(width*i, height*(sequenceRow-1), width, height)); //create a cropped pixmap for each animation tick
         }
     }
 
+    /**
+     * get the next frame of the animation
+     * @param deltaTime - time for one tick
+     * @return - return pixmap
+     */
     public Pixmap getFrame(float deltaTime){
         time += deltaTime;
         if(time >= uploadTime){
@@ -58,21 +63,38 @@ public class Animation {
         return animationSequence.get(number);
     }
 
+    /**
+     * get next animation frame
+     * @return - next animation frame
+     */
     public Pixmap nextAnimation(){
         number++;
         return animationSequence.get(number);
     }
 
+    /**
+     * get previous animation frame
+     * @return - previous animation frame
+     */
     public Pixmap prevAnimation(){
         number--;
         return animationSequence.get(number);
     }
 
+    /**
+     * get a specific frame
+     * @param n - frame number
+     * @return - specific frame
+     */
     public Pixmap getKeyFrame(int n){
         number = n;
         return animationSequence.get(number);
     }
 
+    /**
+     * set the update interval for each tick
+     * @param updateTime - time
+     */
     public void setUpdateTime(float updateTime) {
         this.uploadTime = updateTime;
     }

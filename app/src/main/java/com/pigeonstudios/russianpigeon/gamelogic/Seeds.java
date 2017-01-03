@@ -80,8 +80,8 @@ public class Seeds {
     }
 
     public void update(float deltaTime, int x, int y) {
-        this.nextSeedX = x;
-        this.nextSeedY = y;
+        this.nextSeedX = x; //next seed location (Where the enemy is)
+        this.nextSeedY = y; //next seed location (Where the enemy is)
 
         generateSeeds(deltaTime);
         updateSeeds(deltaTime);
@@ -92,6 +92,9 @@ public class Seeds {
         return seeds;
     }
 
+    /**
+     * THis method is used to keed score of how many seeps were caught
+     */
     public void seedCaught(){
         caught++;
     }

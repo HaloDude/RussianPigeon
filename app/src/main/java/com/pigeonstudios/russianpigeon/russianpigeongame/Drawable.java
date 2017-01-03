@@ -15,7 +15,7 @@ public abstract class Drawable {
     protected int y;
     protected Graphics g;
 
-    private Rect rectangle;
+    private Rect rectangle; //rectangle to check intersection with other objects
 
     public  Drawable(Pixmap pixmap, int x, int y, Graphics g){
         this.pixmap = pixmap;
@@ -56,6 +56,10 @@ public abstract class Drawable {
         g.drawPixmap(pixmap, x, y);
     }
 
+    /**
+     * every drawable object must be updated.
+     * @param deltaTime - update intervals
+     */
     abstract public void update(float deltaTime);
 
     public void drawAtNewLocation(int x, int y){
