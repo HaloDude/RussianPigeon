@@ -2,7 +2,6 @@ package com.pigeonstudios.russianpigeon.androidimpl.graphics;
 
 import android.graphics.Bitmap;
 
-import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics.PixmapFormat;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 
@@ -39,6 +38,19 @@ public class AndroidPixmap implements Pixmap {
     @Override
     public void dispose() {
         bitmap.recycle();
+    }
+
+    /**
+     * Crop a piece of the current pixmap. used for spritesheet
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @return
+     */
+    public AndroidPixmap cropPixmap(int x, int y, int width, int height){
+        Bitmap cropedBitmap = Bitmap.createBitmap(bitmap, x, y, width, height);
+        return new AndroidPixmap(cropedBitmap, format);
     }
 
 

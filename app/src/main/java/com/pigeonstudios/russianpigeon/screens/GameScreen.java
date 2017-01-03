@@ -29,7 +29,7 @@ public class GameScreen extends Screen {
     private int FPS = 0;
 
     private GameWorld gw;
-    public Control c;
+    public Control controlBall;
 
 
     //buttons
@@ -41,12 +41,12 @@ public class GameScreen extends Screen {
 
     public GameScreen(Game game) {
         super(game);
-        gw = new GameWorld(game);
-        c = new Control(game.getGraphics(), gw.pigeon.getPixmap());
-        this.menuButton = new Button(AssetSingleton.instance.getMenuButton(), 240, 1100);
-        this.restartButton = new Button(AssetSingleton.instance.getRestartButton(), 240, 850);
-        this.resumeButton = new Button(AssetSingleton.instance.getResumeButton(), 240, 600);
-        this.pauseButton = new Button(AssetSingleton.instance.getPauseButton(), 980, 0);
+        this.gw = new GameWorld(game);
+        this.controlBall = new Control(game.getGraphics(), gw.pigeon.getPixmap());
+        this.menuButton = new Button(AssetSingleton.instance.getMenuButton(), 240, 1100, game.getGraphics());
+        this.restartButton = new Button(AssetSingleton.instance.getRestartButton(), 240, 850, game.getGraphics());
+        this.resumeButton = new Button(AssetSingleton.instance.getResumeButton(), 240, 600, game.getGraphics());
+        this.pauseButton = new Button(AssetSingleton.instance.getPauseButton(), 980, 0, game.getGraphics());
     }
 
     @Override
@@ -68,17 +68,16 @@ public class GameScreen extends Screen {
     }
 
     private void updateReady(){
-        game.getInput().getKeyEvents();
-
         if(game.getInput().getTouchEvents().size()>0){
             state = GameState.Running;
         }
     }
 
     private void updateRunning(float deltaTime){
+        game.getInput().getKeyEvents();
         List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
         gw.update(deltaTime);
-        c.update(touchEvents);
+        controlBall.update(touchEvents);
 
         for(int i = 0; i < touchEvents.size(); i++) {
             if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_UP) {
@@ -90,7 +89,7 @@ public class GameScreen extends Screen {
         }
 
 
-        if(gw.isSkipped()){
+       if(gw.isSkipped()){
             state = GameState.GameOver;
             return;
         }
@@ -157,16 +156,18 @@ public class GameScreen extends Screen {
         } else {
             FPSCounter++;
         }
+        //TODO fps counter eats up memory. remove when not needed
         game.getGraphics().drawText(String.valueOf(FPS), 0, 50, Color.GREEN);
 
     }
 
     private void drawWorld(){
         game.getGraphics().drawPixmap(AssetSingleton.instance.getBackground(), 0, 0);
-        gw.pigeon.draw(game.getGraphics());
-        gw.enemy.draw(game.getGraphics());
+        gw.pigeon.draw();
+        gw.enemy.draw();
+        //TODO score counter uses memory. make better. idk how. Something to do with creating strings
         game.getGraphics().drawText("Score " + String.valueOf(gw.getScore()), 0, 100, Color.GREEN);
-        c.draw();
+        controlBall.draw();
     }
 
     private void drawReady(){
@@ -174,22 +175,22 @@ public class GameScreen extends Screen {
     }
 
     private void drawRunning(){
-        pauseButton.draw(game.getGraphics());
-        for(int i = 0; i < gw.countSeeds; i++){
-            gw.seeds.get(i).draw(game.getGraphics());
+        pauseButton.draw();
+        for(int i = 0; i < gw.seeds.getSeeds().size(); i++){
+            gw.seeds.getSeeds().get(i).draw();
         }
     }
 
     private void drawPaused(){
-        resumeButton.draw(game.getGraphics());
-        menuButton.draw(game.getGraphics());
-        restartButton.draw(game.getGraphics());
+        resumeButton.draw();
+        menuButton.draw();
+        restartButton.draw();
     }
 
     private void drawGameOver(){
         game.getGraphics().drawPixmap(AssetSingleton.instance.getGameOver(), 300, 400);
-        menuButton.draw(game.getGraphics());
-        restartButton.draw(game.getGraphics());
+        menuButton.draw();
+        restartButton.draw();
     }
 
 

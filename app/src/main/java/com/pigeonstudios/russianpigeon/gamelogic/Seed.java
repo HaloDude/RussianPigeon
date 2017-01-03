@@ -1,5 +1,6 @@
 package com.pigeonstudios.russianpigeon.gamelogic;
 
+import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 import com.pigeonstudios.russianpigeon.russianpigeongame.Drawable;
 import java.util.Random;
@@ -8,13 +9,6 @@ import java.util.Random;
  * Created by tosch on 11.08.2016.
  */
 public class Seed extends Drawable {
-    public Seed(Pixmap pixmap, int x, int y, int speed) {
-        super(pixmap, x, y);
-        setSide();
-        setDirection();
-        yspeed = speed;
-    }
-
     private int xspeed = 6;
     private int yspeed;
     private boolean moveRight = false;
@@ -24,8 +18,17 @@ public class Seed extends Drawable {
     boolean skiped = false;
     boolean catched = false;
 
-    public void update(){
+    public Seed(Pixmap pixmap, int x, int y, int speed, Graphics g) {
+        super(pixmap, x, y, g);
+        setSide();
+        setDirection();
+        yspeed = speed;
+
+    }
+
+    public void update(float deltaTime){
         move();
+
     }
 
     public void move(){
@@ -63,6 +66,5 @@ public class Seed extends Drawable {
     public void setSpeed(int x){
         this.yspeed = x;
     }
-
 
 }

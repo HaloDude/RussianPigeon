@@ -6,12 +6,10 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-import com.pigeonstudios.russianpigeon.androidimpl.AndroidGame;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 
@@ -163,6 +161,8 @@ public class AndroidGraphics implements Graphics {
 
         return new AndroidPixmap(cropedBitmap, format);
     }
+
+
 
     @Override
     public void clear(int color) {

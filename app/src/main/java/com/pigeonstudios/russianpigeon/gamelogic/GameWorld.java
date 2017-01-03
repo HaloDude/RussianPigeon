@@ -4,6 +4,7 @@ package com.pigeonstudios.russianpigeon.gamelogic;
 import android.graphics.Rect;
 
 import com.pigeonstudios.russianpigeon.framework.Game;
+import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.russianpigeongame.Animation;
 import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
 import com.pigeonstudios.russianpigeon.russianpigeongame.Drawable;
@@ -15,111 +16,52 @@ import java.util.LinkedList;
  * Created by tosch on 10.08.2016.
  */
 public class GameWorld {
+    Game game;
+
     public Enemy enemy;
     public Pigeon pigeon;
-    Animation pigeonAnimation;
-
-    public int countSeeds = 0;
-    public float seedFrequency = 1;
-    private int seedSpeed = 6;
+    public Seeds seeds;
 
     private int score = 0;
-    public LinkedList<Seed> seeds = new LinkedList<Seed>();
-    static private float time = 0;
 
     public GameWorld(Game game) {
-        pigeonAnimation = new Animation(0.05f,game.getGraphics(), AssetSingleton.instance.getPigeon(),1,4);
-        enemy = new Enemy(AssetSingleton.instance.getEnemy(), 390, 0);
-        pigeon = new Pigeon(pigeonAnimation.getKeyFrame(0), 1080-680, 1920-600);
+        this.game = game;
+        enemy = new Enemy(AssetSingleton.instance.getEnemy(), 390, 0, game.getGraphics());
+        pigeon = new Pigeon(AssetSingleton.instance.getPigeon(), 1080-680, 1920-600, game.getGraphics() );
+        seeds = new Seeds(enemy.getX(), enemy.getY(), game.getGraphics());
     }
 
     public void update(float deltaTime) {
-        pigeon.update(pigeonAnimation, deltaTime);
-        enemy.update();
-
-
-        generateSeeds(deltaTime);
-        updateSeeds();
-        isCaught();
+        pigeon.update(deltaTime);
+        enemy.update(deltaTime);
+        seeds.update(deltaTime, enemy.getX(), enemy.getY());
+        isSeedCaught();
 
     }
 
-
-    public void generateSeeds(float deltaTime) {
-        /*if(score>=40){
-            seedFrequency = 0.05f;
-        }else if(score>=30){
-            seedFrequency = 0.2f;
-            seedSpeed = 50;
-        }else if(score>=20){
-            seedFrequency = 0.4f;
-            seedSpeed = 15;
-        }else if(score>=10){
-            seedFrequency = 0.7f;
-            seedSpeed = 9;
-        }*/
-        switch (score){
-            case 0:
-                seedFrequency = 1;
-                break;
-            case 10:
-                seedFrequency = 0.8f;
-                seedSpeed = 9;
-                break;
-            case 25:
-                seedFrequency = 0.6f;
-                seedSpeed = 13;
-                break;
-            case 40:
-                seedFrequency = 0.4f;
-                seedSpeed = 15;
-                break;
-        }
-        time += deltaTime;
-        if (time >= seedFrequency) {
-            if (countSeeds>=10){
-                seeds.removeFirst();
-                seeds.add(new Seed(AssetSingleton.instance.getSeed(), enemy.getX(), enemy.getY() + 75, seedSpeed));
-            }else {
-                seeds.add(new Seed(AssetSingleton.instance.getSeed(), enemy.getX(), enemy.getY() + 75, seedSpeed));
-                countSeeds++;
-            }
-            time = 0;
-        }
-
-    }
-
-    public void updateSeeds() {
-        for (Seed s : seeds) {
-            s.update();
-        }
-    }
-
-    public void isCaught() {
+    public void isSeedCaught() {
         //TODO can you make this shit better?
-        for (Seed s : seeds) {
-            if(getRect(pigeon).intersect(getRect(s))){
+        for (Seed s : seeds.getSeeds()) {
+            if(pigeon.getRectangle().intersect(s.getRectangle())){
                 s.catched = true;
                 s.setNewLocation(3000,3000);
                 score++;
+                seeds.seedCaught();
             }
         }
     }
-
     public boolean isSkipped(){
-        for (Seed s : seeds) {
+        for (Seed s : seeds.getSeeds()) {
             if(s.getY()>1920 && s.catched == false){
                 s.skiped = true;
-                return true;
+                //return true;
+                return false;
             }
         }
         return  false;
     }
 
-    public Rect getRect(Drawable d){
-        Rect r = new Rect(d.getX(),d.getY(),d.getX()+d.getPixmap().getWidth(),d.getY()+d.getPixmap().getHeight());
-        return r;
-    }
+
 
     public int getScore(){
         return score;

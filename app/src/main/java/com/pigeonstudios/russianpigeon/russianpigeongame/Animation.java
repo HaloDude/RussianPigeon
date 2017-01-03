@@ -1,5 +1,6 @@
 package com.pigeonstudios.russianpigeon.russianpigeongame;
 
+import com.pigeonstudios.russianpigeon.androidimpl.graphics.AndroidPixmap;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 
@@ -26,13 +27,14 @@ public class Animation {
      * number of the row where the current animation sequence is located.
      * @param graphics - used to create the pixmaps
      * @param spriteSheet - spritesheet of all the animations
-     //* @param rowNumber - the row number of the desired animation sequence --- нахуя?
+     * @param updateTime - frame update interval
      * @param rows - the amount of rows there are. used to claculate width and height
      * @param columns - amount of columns that he animation sequence is taking up
+     * @param sequenceRow - row number of the animation sequence
      */
-    public Animation(float uploadTime, Graphics graphics, Pixmap spriteSheet, int rows, int columns){
+    public Animation(Graphics graphics, AndroidPixmap spriteSheet, float updateTime, int rows, int columns, int sequenceRow){
         this.spriteSheet = spriteSheet;
-        this.uploadTime = uploadTime;
+        this.uploadTime = updateTime;
         frames = columns;
 
         //extreact the animation and put it in the arraylist
@@ -40,7 +42,7 @@ public class Animation {
         int height = spriteSheet.getHeight()/ rows;
 
         for(int i = 0; i < columns; i++){
-            animationSequence.add(graphics.newCropedPixmap("Sprites/pigeonSprite.png", Graphics.PixmapFormat.RGB565, (spriteSheet.getWidth()/columns)*i, 0, spriteSheet.getWidth()/columns, spriteSheet.getHeight()));
+            animationSequence.add(spriteSheet.cropPixmap(width*i, height*(sequenceRow-1), width, height));
         }
     }
 
@@ -69,5 +71,9 @@ public class Animation {
     public Pixmap getKeyFrame(int n){
         number = n;
         return animationSequence.get(number);
+    }
+
+    public void setUpdateTime(float updateTime) {
+        this.uploadTime = updateTime;
     }
 }

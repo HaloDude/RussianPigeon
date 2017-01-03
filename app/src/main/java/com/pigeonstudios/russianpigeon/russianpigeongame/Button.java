@@ -1,6 +1,5 @@
 package com.pigeonstudios.russianpigeon.russianpigeongame;
 
-import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 
@@ -9,7 +8,9 @@ import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
  */
 public class Button extends Drawable {
 
-    public Button(Pixmap pixmap, int x, int y) {
-        super(pixmap, x, y);
+    public Button(Pixmap pixmap, int x, int y, Graphics g) {
+        super(pixmap, x, y, g);
     }
+
+    public void update(float deltaTime){}
 }

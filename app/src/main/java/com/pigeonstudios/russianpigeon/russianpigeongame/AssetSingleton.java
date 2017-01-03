@@ -2,8 +2,6 @@ package com.pigeonstudios.russianpigeon.russianpigeongame;
 
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
 
-import java.util.LinkedList;
-
 /**
  * Created by DennisFedorchuk on 8/3/2016.
  */

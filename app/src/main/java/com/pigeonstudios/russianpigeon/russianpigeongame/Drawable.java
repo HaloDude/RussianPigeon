@@ -1,6 +1,7 @@
 package com.pigeonstudios.russianpigeon.russianpigeongame;
 
-import com.pigeonstudios.russianpigeon.androidimpl.AndroidGame;
+import android.graphics.Rect;
+
 import com.pigeonstudios.russianpigeon.framework.Input;
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
@@ -10,18 +11,24 @@ import com.pigeonstudios.russianpigeon.framework.graphics.Pixmap;
  */
 public abstract class Drawable {
     protected Pixmap pixmap;
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
+    protected Graphics g;
 
-    public  Drawable(Pixmap pixmap, int x, int y){
+    private Rect rectangle;
+
+    public  Drawable(Pixmap pixmap, int x, int y, Graphics g){
         this.pixmap = pixmap;
         this.x = (int)(x);
         this.y = (int)(y);
+        this.g = g;
+        this.rectangle = new Rect(this.x ,this.y , this.x + this.pixmap.getWidth(), this.y + this.pixmap.getHeight());
     }
 
     public void setNewLocation(int x, int y){
         this.x = (int)(x);
         this.y = (int)(y);
+        rectangle.set(x, y, x+pixmap.getWidth(), y+pixmap.getHeight());
     }
 
     public int getX(){
@@ -45,13 +52,19 @@ public abstract class Drawable {
             return false;
     }
 
-    public void draw(Graphics graphics){
-        graphics.drawPixmap(pixmap, x, y);
+    public void draw(){
+        g.drawPixmap(pixmap, x, y);
     }
 
-    public void drawAtNewLocation(Graphics graphics, int x, int y){
+    abstract public void update(float deltaTime);
+
+    public void drawAtNewLocation(int x, int y){
         setNewLocation(x, y);
-        graphics.drawPixmap(pixmap, x, y);
+        g.drawPixmap(pixmap, x, y);
+    }
+
+    public Rect getRectangle(){
+        return rectangle;
     }
 
 }
