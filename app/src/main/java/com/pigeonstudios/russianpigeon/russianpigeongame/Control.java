@@ -117,7 +117,7 @@ public class Control {
         }
 
         public boolean isTouched(Input.TouchEvent event) {
-            if ((event.x > x - 30  && event.x < x + pixmap.getWidth())) {
+            if ((event.x > x - 30  && event.x < x + pixmap.getWidth()+ 30)) {
                 if ((event.y > y - 30 && event.y < y + pixmap.getHeight() - 1))
                     return true;
                 return false;

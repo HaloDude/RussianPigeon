@@ -31,7 +31,6 @@ public class GameScreen extends Screen {
     private GameWorld gw;
     public Control controlBall;
 
-
     //buttons
     private Button menuButton;
     private Button restartButton;
@@ -52,18 +51,19 @@ public class GameScreen extends Screen {
     @Override
     public void update(float deltaTime) {
 
-        if(state == GameState.Ready){
+        if (state == GameState.Ready) {
             updateReady();
         }
-        if(state == GameState.Running){
+        if (state == GameState.Running) {
             updateRunning(deltaTime);
         }
-        if(state == GameState.Paused){
+        if (state == GameState.Paused) {
             updatePaused();
         }
-        if(state == GameState.GameOver){
+        if (state == GameState.GameOver) {
             updateGameOver();
         }
+
 
     }
 
@@ -130,26 +130,24 @@ public class GameScreen extends Screen {
 
     @Override
     public void draw(float deltaTime) {
-
         drawWorld();
 
-        if(state == GameState.Ready){
+        if (state == GameState.Ready) {
             drawReady();
         }
-        if(state == GameState.Running){
+        if (state == GameState.Running) {
             drawRunning();
         }
-        if(state == GameState.Paused){
+        if (state == GameState.Paused) {
             drawPaused();
         }
-        if(state == GameState.GameOver){
+        if (state == GameState.GameOver) {
             drawGameOver();
         }
 
 
-
         time += deltaTime;
-        if(time >= 1){
+        if (time >= 1) {
             time = 0;
             FPS = FPSCounter;
             FPSCounter = 0;
