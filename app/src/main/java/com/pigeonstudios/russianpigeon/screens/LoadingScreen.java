@@ -29,6 +29,7 @@ public class LoadingScreen extends Screen {
         AssetSingleton.instance.setStartButton(game.getGraphics().newScaledPixmap("Buttons/StartButton.png", Graphics.PixmapFormat.ARGB4444, 500, 500));
         AssetSingleton.instance.setMusicButton(game.getGraphics().newScaledPixmap("Buttons/musicButton.png", Graphics.PixmapFormat.ARGB4444, 250, 250));
         AssetSingleton.instance.setSoundButton(game.getGraphics().newScaledPixmap("Buttons/soundButton.png", Graphics.PixmapFormat.ARGB4444, 250, 250));
+        AssetSingleton.instance.setRecordButton(game.getGraphics().newScaledPixmap("Buttons/recordButton.png", Graphics.PixmapFormat.ARGB4444, 250, 250));
         AssetSingleton.instance.setReady(game.getGraphics().newScaledPixmap("Menu/ready.png", Graphics.PixmapFormat.RGB565, 1000, 400));
         AssetSingleton.instance.setGameOver(game.getGraphics().newPixmap("Menu/gameOver.png", Graphics.PixmapFormat.RGB565));
         //=================//

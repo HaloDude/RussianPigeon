@@ -67,11 +67,11 @@ public class GameWorld {
                 seedSpeed = 9;
                 break;
             case 25:
-                seedFrequency = 0.6f;
-                seedSpeed = 13;
+                seedFrequency = 0.7f;
+                seedSpeed = 12;
                 break;
             case 40:
-                seedFrequency = 0.4f;
+                seedFrequency = 0.6f;
                 seedSpeed = 15;
                 break;
         }

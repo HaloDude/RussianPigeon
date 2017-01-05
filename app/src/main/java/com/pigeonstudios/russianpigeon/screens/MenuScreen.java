@@ -18,12 +18,14 @@ public class MenuScreen extends Screen {
     private Button startButton;
     private Button musicButton;
     private Button soundButton;
+    private Button recordButton;
 
     public MenuScreen(Game game) {
         super(game);
         this.startButton = new Button(AssetSingleton.instance.getStartButton(), 290, 500);
-        this.musicButton = new Button(AssetSingleton.instance.getMusicButton(), 200, 1500);
-        this.soundButton = new Button(AssetSingleton.instance.getSoundButton(), 630, 1500);
+        this.musicButton = new Button(AssetSingleton.instance.getMusicButton(), 80, 1500);
+        this.soundButton = new Button(AssetSingleton.instance.getSoundButton(), 415, 1500);
+        this.recordButton = new Button(AssetSingleton.instance.getRecordButton(), 750, 1500);
     }
 
     @Override
@@ -47,6 +49,7 @@ public class MenuScreen extends Screen {
         startButton.draw(game.getGraphics());
         soundButton.draw(game.getGraphics());
         musicButton.draw(game.getGraphics());
+        recordButton.draw(game.getGraphics());
     }
 
     @Override

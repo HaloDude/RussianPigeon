@@ -21,6 +21,7 @@ public class AssetSingleton {
     private Pixmap menuButton;
     private Pixmap musicButton;
     private Pixmap soundButton;
+    private Pixmap recordButton;
     private Pixmap enemy;
     private Pixmap seed;
     private Pixmap controlBall;
@@ -47,6 +48,14 @@ public class AssetSingleton {
 
     public void setMusicButton(Pixmap musicButton) {
         this.musicButton = musicButton;
+    }
+
+    public Pixmap getRecordButton() {
+        return recordButton;
+    }
+
+    public void setRecordButton(Pixmap recordButton) {
+        this.recordButton = recordButton;
     }
 
     public Pixmap getPauseButton() {
