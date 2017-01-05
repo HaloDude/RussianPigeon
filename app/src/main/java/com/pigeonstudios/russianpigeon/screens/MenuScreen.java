@@ -21,15 +21,15 @@ public class MenuScreen extends Screen {
 
     public MenuScreen(Game game) {
         super(game);
-        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 290, 500);
-        this.musicButton = new Button(AssetSingleton.instance.getMusicButton(), 200, 1500);
-        this.soundButton = new Button(AssetSingleton.instance.getSoundButton(), 630, 1500);
+        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 290, 500, game.getGraphics());
+        this.musicButton = new Button(AssetSingleton.instance.getMusicButton(), 200, 1500, game.getGraphics());
+        this.soundButton = new Button(AssetSingleton.instance.getSoundButton(), 630, 1500, game.getGraphics());
     }
 
     @Override
     public void update(float deltaTime) {
         //test for touch
-        List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
+       List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         game.getInput().getKeyEvents(); // do this to clear the buffer. idk why
         for(int i = 0; i < touchEvents.size(); i++) {
             if (touchEvents.get(i).type == TouchEvent.TOUCH_UP) {
@@ -44,9 +44,9 @@ public class MenuScreen extends Screen {
     @Override
     public void draw(float deltaTime) {
         game.getGraphics().drawPixmap(AssetSingleton.instance.getMenuScreen(), 0, 0);
-        startButton.draw(game.getGraphics());
-        soundButton.draw(game.getGraphics());
-        musicButton.draw(game.getGraphics());
+        startButton.draw();
+        soundButton.draw();
+        musicButton.draw();
     }
 
     @Override
