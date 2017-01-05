@@ -17,9 +17,10 @@ public class Control {
     private Graphics g;
     private int ballWidth = 300/2;
     private int ballHeight = 300/2;
-    private float accel=0;
+    static public float accel=0;
     static public int targetX;
     private Pixmap target;
+    static public int fingerPosition;
 
     public Control(Graphics g, Pixmap target){
         this.g = g;
@@ -27,8 +28,9 @@ public class Control {
         this.x = 540 - ballWidth;
         this.y = g.getHeight() - (ballHeight*2);
         this.targetX = g.getWidth()/2 - target.getWidth()/2;
-        this.controlBall = new ControlBall(AssetSingleton.instance.getControlBall(), x, y);
+        this.controlBall = new ControlBall(AssetSingleton.instance.getControlBall(), x, y, g);
         this.target = target;
+        this.fingerPosition = 0;
     }
 
     public void update(List<Input.TouchEvent> touchEvents){
@@ -51,7 +53,7 @@ public class Control {
                 //set the new x coordinate for the ball
 
                     this.x = (int) ((touchEvents.get(i).x - ballWidth));
-
+                    fingerPosition = touchEvents.get(i).x;
             } else if (touchEvents.get(i).type == Input.TouchEvent.TOUCH_UP) { //if finger lifted set flag to false
                 touched = false;
             }else if(!controlBall.isTouched(touchEvents.get(i)) ){  //if the screen is touched but ball is not set flag to fals
@@ -87,9 +89,6 @@ public class Control {
 
         targetX += 25 * accel; //move target 15 pixels times the acceleration
 
-
-
-
         /* this makes the pigeon slide back when it hits the walls*/
         /*if(targetX > 870){
             targetX = (int)(830-(200*accel));
@@ -101,7 +100,7 @@ public class Control {
     }
 
     public void draw(){
-        controlBall.draw(g);
+        controlBall.draw();
     }
 
     public int getTargetX() {
@@ -113,21 +112,21 @@ public class Control {
     }
 
     private class ControlBall extends Drawable{
-        public ControlBall(Pixmap pixmap, int x, int y) {
-            super(pixmap, x, y);
+        public ControlBall(Pixmap pixmap, int x, int y, Graphics g) {
+            super(pixmap, x, y, g);
         }
 
         public boolean isTouched(Input.TouchEvent event) {
-            if ((event.x > x  && event.x < x + pixmap.getWidth())) {
-                if ((event.y > y -30 && event.y < y + pixmap.getHeight() - 1))
+            if ((event.x > x - 30  && event.x < x + pixmap.getWidth())) {
+                if ((event.y > y - 30 && event.y < y + pixmap.getHeight() - 1))
                     return true;
                 return false;
             } else
                 return false;
         }
+
+        public void update(float deltaTime){}
     }
-
-
 
 
 

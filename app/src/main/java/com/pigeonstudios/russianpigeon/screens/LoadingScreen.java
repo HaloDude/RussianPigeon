@@ -20,7 +20,7 @@ public class LoadingScreen extends Screen {
         AssetSingleton.instance.setEnemy(game.getGraphics().newScaledPixmap("Sprites/Enemy.png", Graphics.PixmapFormat.RGB565, 300, 300));
         AssetSingleton.instance.setSeed(game.getGraphics().newScaledPixmap("Sprites/seed.png", Graphics.PixmapFormat.RGB565, 35, 70));
         AssetSingleton.instance.setBackground(game.getGraphics().newScaledPixmap("Screens/Background.jpg", Graphics.PixmapFormat.RGB565, 1080, 1920));
-        AssetSingleton.instance.setPigeon(game.getGraphics().newScaledPixmap("Sprites/pigeonSprite.png", Graphics.PixmapFormat.RGB565, 1000,250));
+        AssetSingleton.instance.setPigeon(game.getGraphics().newPixmap("Sprites/PigeonSpriteSheet.png", Graphics.PixmapFormat.RGB565));
         AssetSingleton.instance.setMenuScreen(game.getGraphics().newPixmap("Screens/menuScreen.jpg", Graphics.PixmapFormat.RGB565));
         AssetSingleton.instance.setMenuButton(game.getGraphics().newPixmap("Buttons/menuButton.png", Graphics.PixmapFormat.ARGB4444));
         AssetSingleton.instance.setRestartButton(game.getGraphics().newPixmap("Buttons/restartButton.png", Graphics.PixmapFormat.ARGB4444));
@@ -39,7 +39,7 @@ public class LoadingScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         i++;
-        if(i==150) finishedAnimation = true;
+        if(i==1) finishedAnimation = true;
 
         if(finishedLoading && finishedAnimation)
             game.setScreen(new MenuScreen(game));
