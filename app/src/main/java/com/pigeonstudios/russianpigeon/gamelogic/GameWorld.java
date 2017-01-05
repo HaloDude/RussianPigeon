@@ -28,6 +28,7 @@ public class GameWorld {
         this.game = game;
         enemy = new Enemy(AssetSingleton.instance.getEnemy(), 390, 0, game.getGraphics());
         pigeon = new Pigeon(AssetSingleton.instance.getPigeon(), 1080-680, 1920-600, game.getGraphics() );
+        seeds = new Seeds(enemy.getX(), enemy.getY(), game.getGraphics());
     }
 
     public void update(float deltaTime) {

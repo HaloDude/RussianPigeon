@@ -29,7 +29,7 @@ public class MenuScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         //test for touch
-        List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
+       List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         game.getInput().getKeyEvents(); // do this to clear the buffer. idk why
         for(int i = 0; i < touchEvents.size(); i++) {
             if (touchEvents.get(i).type == TouchEvent.TOUCH_UP) {
