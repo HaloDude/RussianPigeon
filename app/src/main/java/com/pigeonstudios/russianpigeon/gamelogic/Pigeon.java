@@ -17,7 +17,7 @@ public class Pigeon extends Drawable {
 
     private Animation walkingAnimationLeft;
     private Animation walkingAnimationRight;
-
+    public int lives = 3;
 
     public Pigeon(Pixmap pixmap, int x, int y, Graphics g) {
         super(pixmap, x, y, g);
@@ -38,6 +38,7 @@ public class Pigeon extends Drawable {
 
         move();
     }
+
 
     public void move(){
         setNewLocation(Control.targetX, 1320);

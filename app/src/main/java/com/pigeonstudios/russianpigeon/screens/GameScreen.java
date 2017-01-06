@@ -89,7 +89,7 @@ public class GameScreen extends Screen {
         }
 
 
-       if(gw.isSkipped()){
+       if(gw.isLost()){
             state = GameState.GameOver;
             return;
         }
@@ -166,6 +166,9 @@ public class GameScreen extends Screen {
         //TODO score counter uses memory. make better. idk how. Something to do with creating strings
         game.getGraphics().drawText("Score " + String.valueOf(gw.getScore()), 0, 100, Color.GREEN);
         controlBall.draw();
+        for(int i = 0; i < gw.pigeon.lives; i++){
+            game.getGraphics().drawPixmap(AssetSingleton.instance.getLive(), 50+(50*(i+1)), 0);
+        }
     }
 
     private void drawReady(){

@@ -1,5 +1,6 @@
 package com.pigeonstudios.russianpigeon.screens;
 
+
 import com.pigeonstudios.russianpigeon.androidimpl.Input.AndroidInput;
 import com.pigeonstudios.russianpigeon.framework.Game;
 import com.pigeonstudios.russianpigeon.framework.Input.TouchEvent;
@@ -18,28 +19,61 @@ public class MenuScreen extends Screen {
     private Button startButton;
     private Button musicButton;
     private Button soundButton;
+    private Button recordButton;
 
     public MenuScreen(Game game) {
         super(game);
         this.startButton = new Button(AssetSingleton.instance.getStartButton(), 290, 500, game.getGraphics());
-        this.musicButton = new Button(AssetSingleton.instance.getMusicButton(), 200, 1500, game.getGraphics());
-        this.soundButton = new Button(AssetSingleton.instance.getSoundButton(), 630, 1500, game.getGraphics());
+        this.musicButton = new Button(AssetSingleton.instance.getMusicButton(), 80, 1500, game.getGraphics());
+        this.soundButton = new Button(AssetSingleton.instance.getSoundButton(), 415, 1500, game.getGraphics());
+        this.recordButton = new Button(AssetSingleton.instance.getRecordButton(), 750, 1500, game.getGraphics());
     }
 
     @Override
     public void update(float deltaTime) {
-        //test for touch
-       List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
-        game.getInput().getKeyEvents(); // do this to clear the buffer. idk why
-        for(int i = 0; i < touchEvents.size(); i++) {
-            if (touchEvents.get(i).type == TouchEvent.TOUCH_UP) {
-                if (startButton.isTouched(touchEvents.get(i))) {
-                    game.setScreen(new GameScreen(game));
-                }
-            }
+        startButtonUpdate();
+        musicButtonUpdate();
+        soundButtonUpdate();
+        recordButtonUpdate();
+    }
+
+    private void startButtonUpdate(){
+        if(isTouched(startButton))
+            game.setScreen(new GameScreen(game));
+    }
+
+    private void musicButtonUpdate(){
+        if(isTouched(musicButton)) {
+            //TODO action listener for musicButton
+        }
+    }
+
+    private void soundButtonUpdate(){
+        if(isTouched(soundButton)){
+            //TODO action listener for soundButton
+        }
+    }
+
+    private void recordButtonUpdate(){
+        if(isTouched(recordButton)){
+            //TODO action listener for recordButton
         }
 
     }
+
+    private boolean isTouched(Button button){
+        List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
+        game.getInput().getKeyEvents(); // do this to clear the buffer. idk why
+        for(int i = 0; i < touchEvents.size(); i++) {
+            if (touchEvents.get(i).type == TouchEvent.TOUCH_UP) {
+                if (button.isTouched(touchEvents.get(i))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public void draw(float deltaTime) {
@@ -47,6 +81,7 @@ public class MenuScreen extends Screen {
         startButton.draw();
         soundButton.draw();
         musicButton.draw();
+        recordButton.draw();
     }
 
     @Override

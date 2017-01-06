@@ -15,8 +15,8 @@ public class Seed extends Drawable {
     private boolean moveLeft = false;
     private int direction;
     private Random random = new Random();
-    boolean skiped = false;
-    boolean catched = false;
+    boolean skipped = false;
+    boolean caught = false;
 
     public Seed(Pixmap pixmap, int x, int y, int speed, Graphics g) {
         super(pixmap, x, y, g);
@@ -54,8 +54,7 @@ public class Seed extends Drawable {
 
     private void setDirection(){
         direction = random.nextInt(3);
-        System.out.print(direction);
-
+        //System.out.print(direction);
     }
 
     private void setSide(){
