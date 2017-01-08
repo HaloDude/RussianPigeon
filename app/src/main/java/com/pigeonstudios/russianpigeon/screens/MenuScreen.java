@@ -21,12 +21,20 @@ public class MenuScreen extends Screen {
     private Button soundButton;
     private Button recordButton;
 
+    private int startButtonYPosition = 500;
+    private int musicButtonYPosition = 1500;
+    private int soundButtonYPosition = 1500;
+    private int recordButtonYPosition = 1500;
+
+    private int buttonAnimationMove = 50;
+
+
     public MenuScreen(Game game) {
         super(game);
-        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 290, 500, game.getGraphics());
-        this.musicButton = new Button(AssetSingleton.instance.getMusicButton(), 80, 1500, game.getGraphics());
-        this.soundButton = new Button(AssetSingleton.instance.getSoundButton(), 415, 1500, game.getGraphics());
-        this.recordButton = new Button(AssetSingleton.instance.getRecordButton(), 750, 1500, game.getGraphics());
+        this.startButton = new Button(AssetSingleton.instance.getStartButton(), 290, 2000, game.getGraphics());
+        this.musicButton = new Button(AssetSingleton.instance.getMusicButton(), 80, 2000, game.getGraphics());
+        this.soundButton = new Button(AssetSingleton.instance.getSoundButton(), 415, 2000, game.getGraphics());
+        this.recordButton = new Button(AssetSingleton.instance.getRecordButton(), 750, 2000, game.getGraphics());
     }
 
     @Override
@@ -38,13 +46,24 @@ public class MenuScreen extends Screen {
     }
 
     private void startButtonUpdate(){
-        if(isTouched(startButton))
+        if(isTouched(startButton)) {
             game.setScreen(new GameScreen(game));
+        }
+
+        if(startButton.getY() >= startButtonYPosition){ //if the button is lower than final position
+            startButton.drawAtNewLocation(startButton.getX(), startButton.getY() - buttonAnimationMove - 20);
+        }
     }
 
     private void musicButtonUpdate(){
         if(isTouched(musicButton)) {
             //TODO action listener for musicButton
+        }
+
+        if(startButton.getY() <= startButtonYPosition + 200){ // if start button is almost at position
+            if(musicButton.getY() >= musicButtonYPosition){ //if music button not in final position
+                musicButton.drawAtNewLocation(musicButton.getX(), musicButton.getY() - buttonAnimationMove);
+            }
         }
     }
 
@@ -52,11 +71,23 @@ public class MenuScreen extends Screen {
         if(isTouched(soundButton)){
             //TODO action listener for soundButton
         }
+
+        if(musicButton.getY() <= musicButtonYPosition + 100){ // if music button is almost at final position
+            if(soundButton.getY() >= soundButtonYPosition){ // if sound button is not in position
+                soundButton.drawAtNewLocation(soundButton.getX(), soundButton.getY() - buttonAnimationMove);
+            }
+        }
     }
 
     private void recordButtonUpdate(){
         if(isTouched(recordButton)){
             //TODO action listener for recordButton
+        }
+
+        if(soundButton.getY() <= soundButtonYPosition + 100){ // if sound button is almost at position
+            if(recordButton.getY() >=recordButtonYPosition){ // if record button is not in proper position
+                recordButton.drawAtNewLocation(recordButton.getX(), recordButton.getY() - buttonAnimationMove);
+            }
         }
 
     }
