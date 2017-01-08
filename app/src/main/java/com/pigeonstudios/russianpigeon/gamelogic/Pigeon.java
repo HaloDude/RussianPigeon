@@ -12,15 +12,12 @@ import com.pigeonstudios.russianpigeon.russianpigeongame.Drawable;
  * Created by tosch on 12.10.2016.
  */
 public class Pigeon extends Drawable {
-    boolean moveRight = false;
-    boolean moveLeft = false;
-
     private Animation walkingAnimationLeft;
     private Animation walkingAnimationRight;
     public int lives = 3;
 
     public Pigeon(Pixmap pixmap, int x, int y, Graphics g) {
-        super(pixmap, x, y, g);
+        super(pixmap, x, y, g, 0.85f);
         walkingAnimationLeft = new Animation(this.g, (AndroidPixmap)AssetSingleton.instance.getPigeon(), 0.5f, 2, 4, 1);
         walkingAnimationRight = new Animation(this.g, (AndroidPixmap)AssetSingleton.instance.getPigeon(), 0.5f, 2, 4, 2);
         this.pixmap = walkingAnimationLeft.getFrame(0);

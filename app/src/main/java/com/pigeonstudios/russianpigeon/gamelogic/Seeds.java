@@ -81,9 +81,11 @@ public class Seeds {
     }
 
     /**
-     * THis method is used to keed score of how many seeps were caught
+     * THis method is used to keep score of how many seeps were caught
      */
-    public void seedCaught(){
+    public void seedCaught(int positionInList){
+        seeds.remove(positionInList);
+        countSeeds--;
         caught++;
     }
 }

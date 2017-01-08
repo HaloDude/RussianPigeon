@@ -1,6 +1,7 @@
 package com.pigeonstudios.russianpigeon.gamelogic;
 
 
+import com.pigeonstudios.russianpigeon.androidimpl.graphics.AndroidPixmap;
 import com.pigeonstudios.russianpigeon.framework.Game;
 import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
 
@@ -33,13 +34,10 @@ public class GameWorld {
     }
 
     private void isSeedCaught() {
-        //TODO can you make this shit better?
-        for (Seed s : seeds.getSeeds()) {
-            if(pigeon.getRectangle().intersect(s.getRectangle())){
-                s.caught = true;
-                s.setNewLocation(3000,3000);
+        for(int i = 0; i< seeds.getSeeds().size(); i++){
+            if(pigeon.getRectangle().intersect(seeds.getSeeds().get(i).getRectangle())){
+                seeds.seedCaught(i);
                 score++;
-                seeds.seedCaught();
             }
         }
     }
