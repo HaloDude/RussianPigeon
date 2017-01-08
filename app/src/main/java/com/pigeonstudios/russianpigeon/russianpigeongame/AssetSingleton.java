@@ -14,6 +14,7 @@ public class AssetSingleton {
     private Pixmap pigeon;
     private Pixmap startButton;
     private Pixmap restartButton;
+    private Pixmap recordButton;
     private Pixmap resumeButton;
     private Pixmap pauseButton;
     private Pixmap menuButton;
@@ -24,8 +25,25 @@ public class AssetSingleton {
     private Pixmap controlBall;
     private Pixmap ready;
     private Pixmap gameOver;
+    private Pixmap live;
 
     private AssetSingleton(){}
+
+    public Pixmap getRecordButton() {
+        return recordButton;
+    }
+
+    public void setRecordButton(Pixmap recordButton) {
+        this.recordButton = recordButton;
+    }
+
+    public Pixmap getLive() {
+        return live;
+    }
+
+    public void setLive(Pixmap live) {
+        this.live = live;
+    }
 
     public Pixmap getMenuButton() {
         return menuButton;

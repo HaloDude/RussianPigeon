@@ -1,15 +1,9 @@
 package com.pigeonstudios.russianpigeon.gamelogic;
 
 
-import android.graphics.Rect;
-
+import com.pigeonstudios.russianpigeon.androidimpl.graphics.AndroidPixmap;
 import com.pigeonstudios.russianpigeon.framework.Game;
-import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
-import com.pigeonstudios.russianpigeon.russianpigeongame.Animation;
 import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
-import com.pigeonstudios.russianpigeon.russianpigeongame.Drawable;
-
-import java.util.LinkedList;
 
 
 /**
@@ -26,7 +20,7 @@ public class GameWorld {
 
     public GameWorld(Game game) {
         this.game = game;
-        enemy = new Enemy(AssetSingleton.instance.getEnemy(), 390, 0, game.getGraphics());
+        enemy = new Enemy(AssetSingleton.instance.getEnemy(), 390, 50, game.getGraphics());
         pigeon = new Pigeon(AssetSingleton.instance.getPigeon(), 1080-680, 1920-600, game.getGraphics() );
         seeds = new Seeds(enemy.getX(), enemy.getY(), game.getGraphics());
     }
@@ -36,29 +30,29 @@ public class GameWorld {
         enemy.update(deltaTime);
         seeds.update(deltaTime, enemy.getX(), enemy.getY());
         isSeedCaught();
-
+        isSeedSkipped();
     }
 
-    public void isSeedCaught() {
-        //TODO can you make this shit better?
-        for (Seed s : seeds.getSeeds()) {
-            if(pigeon.getRectangle().intersect(s.getRectangle())){
-                s.catched = true;
-                s.setNewLocation(3000,3000);
+    private void isSeedCaught() {
+        for(int i = 0; i< seeds.getSeeds().size(); i++){
+            if(pigeon.getRectangle().intersect(seeds.getSeeds().get(i).getRectangle())){
+                seeds.seedCaught(i);
                 score++;
-                seeds.seedCaught();
             }
         }
     }
-    public boolean isSkipped(){
+
+    private void isSeedSkipped(){
         for (Seed s : seeds.getSeeds()) {
-            if(s.getY()>1920 && s.catched == false){
-                s.skiped = true;
-                //return true;
-                return false;
+            if(s.getY()>1920 && !s.caught && !s.skipped){
+                s.skipped = true;
+                pigeon.lives--;
             }
         }
-        return  false;
+    }
+
+    public boolean isLost(){
+        return pigeon.lives == 0;
     }
 
 

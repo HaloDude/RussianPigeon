@@ -13,7 +13,7 @@ public class Enemy extends Drawable{
         super(pixmap, x, y, g);
     }
     private int x = 390;
-    private int y = 0;
+    private int y = 50;
     private int speed = 4;
     private boolean moveRight = true;
     private boolean moveLeft = false;

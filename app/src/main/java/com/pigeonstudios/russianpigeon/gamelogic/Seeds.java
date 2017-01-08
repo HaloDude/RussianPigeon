@@ -10,7 +10,7 @@ import java.util.LinkedList;
  */
 
 public class Seeds {
-    private LinkedList<Seed> seeds = new LinkedList<Seed>();
+    private LinkedList<Seed> seeds = new LinkedList<>();
     private float seedFrequency = 1;
     private int seedSpeed = 6;
     static private float time = 0;
@@ -21,7 +21,7 @@ public class Seeds {
     private int countSeeds = 0;
     private int caught = 0;
 
-    Graphics g;
+    private Graphics g;
 
     public Seeds(int nextSeedX, int nextSeedY, Graphics g){
         this.nextSeedX = nextSeedX;
@@ -30,18 +30,6 @@ public class Seeds {
     }
 
     public void generateSeeds(float deltaTime) {
-        /*if(score>=40){
-            seedFrequency = 0.05f;
-        }else if(score>=30){
-            seedFrequency = 0.2f;
-            seedSpeed = 50;
-        }else if(score>=20){
-            seedFrequency = 0.4f;
-            seedSpeed = 15;
-        }else if(score>=10){
-            seedFrequency = 0.7f;
-            seedSpeed = 9;
-        }*/
         switch (caught){
             case 0:
                 seedFrequency = 1;
@@ -93,9 +81,11 @@ public class Seeds {
     }
 
     /**
-     * THis method is used to keed score of how many seeps were caught
+     * THis method is used to keep score of how many seeps were caught
      */
-    public void seedCaught(){
+    public void seedCaught(int positionInList){
+        seeds.remove(positionInList);
+        countSeeds--;
         caught++;
     }
 }
