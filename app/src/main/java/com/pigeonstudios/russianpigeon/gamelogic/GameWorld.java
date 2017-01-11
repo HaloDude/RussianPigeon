@@ -43,9 +43,9 @@ public class GameWorld {
     }
 
     private void isSeedSkipped(){
-        for (Seed s : seeds.getSeeds()) {
-            if(s.getY()>1920 && !s.caught && !s.skipped){
-                s.skipped = true;
+        for (int i = 0; i<seeds.getSeeds().size(); i++) {
+            if(seeds.getSeeds().get(i).getY()>1920 && !seeds.getSeeds().get(i).caught && !seeds.getSeeds().get(i).skipped){
+                seeds.getSeeds().get(i).skipped = true;
                 pigeon.lives--;
             }
         }

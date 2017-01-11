@@ -62,8 +62,8 @@ public class Seeds {
     }
 
     public void updateSeeds(float deltaTime) {
-        for (Seed s : seeds) {
-            s.update(deltaTime);
+        for (int i = 0; i<seeds.size(); i++) {
+            seeds.get(i).update(deltaTime);
         }
     }
 
