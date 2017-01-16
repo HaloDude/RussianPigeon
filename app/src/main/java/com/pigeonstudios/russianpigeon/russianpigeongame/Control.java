@@ -80,10 +80,10 @@ public class Control {
         }
         controlBall.setNewLocation(this.x, this.y); //set new calculated position for the ball
         //if the target moves too far to the side make it come out of another side
-        if(targetX >= g.getWidth() + target.getWidth()) {
+        if(targetX >= g.getWidth()) {
             targetX = -target.getWidth();
         }else if(targetX <= -target.getWidth()){
-            targetX = g.getWidth() + target.getWidth();
+            targetX = g.getWidth();
         }
 
 
