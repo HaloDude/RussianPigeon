@@ -35,7 +35,7 @@ public class GameWorld {
 
     private void isSeedCaught() {
         for(int i = 0; i< seeds.getSeeds().size(); i++){
-            if(pigeon.getRectangle().intersect(seeds.getSeeds().get(i).getRectangle())){
+            if(!seeds.getSeeds().get(i).caught && pigeon.getRectangle().intersect(seeds.getSeeds().get(i).getRectangle())){
                 seeds.seedCaught(i);
                 score++;
             }

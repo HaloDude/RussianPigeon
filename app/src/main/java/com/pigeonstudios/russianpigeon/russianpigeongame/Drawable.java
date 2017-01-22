@@ -108,6 +108,13 @@ public abstract class Drawable {
         this.rectangleScaleFactor = scaleFactor;
     }
 
+    public void scalePixmap(float scaleFactor){
+        this.pixmap = pixmap.scalePixmap(scaleFactor);
+    }
+
+    public void scalePixmap(int width, int height){
+        this.pixmap = pixmap.scalePixmap(width, height);
+    }
 
 
 }

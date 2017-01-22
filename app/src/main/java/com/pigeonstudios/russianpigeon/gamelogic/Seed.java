@@ -17,6 +17,7 @@ public class Seed extends Drawable {
     private Random random = new Random();
     boolean skipped = false;
     boolean caught = false;
+    boolean eaten = false;
 
     public Seed(Pixmap pixmap, int x, int y, int speed, Graphics g) {
         super(pixmap, x, y, g);
@@ -32,21 +33,28 @@ public class Seed extends Drawable {
     }
 
     public void move(){
-
-        if(moveRight){
-            if(getX()>=1045){
-                moveRight = false;
-                moveLeft = true;
-                return;
+        if(!caught) {
+            if (moveRight) {
+                if (getX() >= 1045) {
+                    moveRight = false;
+                    moveLeft = true;
+                    return;
+                }
+                this.setNewLocation(getX() + (xspeed * direction), getY() + yspeed);
+            } else if (moveLeft) {
+                if (getX() <= 0) {
+                    moveRight = true;
+                    moveLeft = false;
+                    return;
+                }
+                this.setNewLocation(getX() - (xspeed * direction), getY() + yspeed);
             }
-            this.setNewLocation(getX()+(xspeed*direction),getY()+yspeed);
-        }else if(moveLeft){
-            if(getX()<=0){
-                moveRight = true;
-                moveLeft = false;
-                return;
+        }else{
+            this.scalePixmap(0.9f);
+            this.setNewLocation(getX() +5, getY() + 5);
+            if(this.rectangleScaleFactor<=0.2f){
+                this.eaten = true;
             }
-            this.setNewLocation(getX()-(xspeed*direction),getY()+yspeed);
         }
 
     }
@@ -61,6 +69,7 @@ public class Seed extends Drawable {
         moveRight = random.nextBoolean();
         moveLeft = !moveRight;
     }
+
 
     public void setSpeed(int x){
         this.yspeed = x;

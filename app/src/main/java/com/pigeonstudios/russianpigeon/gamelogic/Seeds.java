@@ -84,8 +84,11 @@ public class Seeds {
      * THis method is used to keep score of how many seeps were caught
      */
     public void seedCaught(int positionInList){
-        seeds.remove(positionInList);
-        countSeeds--;
-        caught++;
+        seeds.get(positionInList).caught = true;
+        if(seeds.get(positionInList).eaten){
+            seeds.remove(positionInList);
+            countSeeds--;
+            caught++;
+        }
     }
 }
