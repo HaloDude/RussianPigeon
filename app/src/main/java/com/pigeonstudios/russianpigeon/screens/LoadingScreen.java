@@ -40,7 +40,7 @@ public class LoadingScreen extends Screen {
     @Override
     public void update(float deltaTime) {
         i++;
-        if(i==1) finishedAnimation = true;
+        if(i==200) finishedAnimation = true;
 
         if(finishedLoading && finishedAnimation)
             game.setScreen(new MenuScreen(game));

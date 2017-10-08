@@ -1,5 +1,7 @@
 package com.pigeonstudios.russianpigeon.gamelogic;
 
+import android.graphics.Color;
+
 import com.pigeonstudios.russianpigeon.framework.graphics.Graphics;
 import com.pigeonstudios.russianpigeon.russianpigeongame.AssetSingleton;
 
@@ -30,6 +32,7 @@ public class Seeds {
     }
 
     public void generateSeeds(float deltaTime) {
+
         switch (caught){
             case 0:
                 seedFrequency = 1;
@@ -85,10 +88,11 @@ public class Seeds {
      */
     public void seedCaught(int positionInList){
         seeds.get(positionInList).caught = true;
+        caught++;
         if(seeds.get(positionInList).eaten){
             seeds.remove(positionInList);
             countSeeds--;
-            caught++;
+
         }
     }
 }
